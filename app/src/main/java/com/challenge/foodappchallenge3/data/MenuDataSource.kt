@@ -7,43 +7,44 @@ import com.challenge.foodappchallenge3.model.Menu
 interface MenuDataSource {
     fun getMenuData() : List<Menu>
 }
-class MenuDataSourceImpl() : MenuDataSource{
+class MenuDataSourceImplementation() : MenuDataSource{
     override fun getMenuData(): List<Menu> {
         return  mutableListOf(
             Menu(
                 menuName = "Ayam Geprek",
-                menuPrice = 35000.0,
-                menuImg = R.drawable.iv_fried_chicken,
-                menuDesc = "Ayam geprek adalah hidangan dari potongan ayam goreng yang digeprek atau dihancurkan dengan ulekan, lalu dilumuri dengan saus sambal pedas."
+                menuPrice = 10000.0,
+                menuImg = R.drawable.iv_roasted_chicken,
+                menuDesc = "Ayam Geprek adalah makanan ayam goreng tepung khas Indonesia yang diulek atau dilumatkan bersama sambal bajak."
             ),
             Menu(
-                menuName = "Ayam Goreng",
-                menuPrice = 40000.0,
+                menuName = "Ayam Goyeng",
+                menuPrice = 11000.0,
                 menuImg = R.drawable.iv_fried_chicken,
-                menuDesc = "Ayam goreng adalah hidangan ayam yang digoreng dalam minyak panas hingga kulitnya menjadi renyah dan dagingnya matang sempurna. Biasanya, ayam ini dibumbui dengan campuran rempah-rempah seperti garam, merica, kunyit, bawang putih, dan bawang merah untuk memberikan rasa yang gurih dan lezat."
+                menuDesc = "Ayam Goyeng adalah hidangan yang dibuat dari potongan daging ayam yang telah dilapisi dengan tepung atau adonan encer yang dibumbui dan digoreng."
             ),
             Menu(
                 menuName = "Ayam Bakar Mantab",
-                menuPrice = 50000.0,
-                menuImg = R.drawable.iv_mie,
+                menuPrice =14000.0,
+                menuImg = R.drawable.iv_griiled_chicken,
                 menuDesc = "Ayam bakar adalah hidangan dari potongan ayam dipanggang atau dibakar hingga matang dan memiliki cita rasa manis, pedas, dan beraroma rempah."
             ),
             Menu(
-                menuName = "Sate Ayam",
-                menuPrice = 30000.0,
+                menuName = "Nasi Goreng",
+                menuPrice = 13000.0,
                 menuImg = R.drawable.iv_fried_rice,
-                menuDesc = "Sate ayam adalah hidangan yang terbuat dari potongan daging ayam yang ditusuk dengan tusukan bambu atau sate, kemudian dipanggang di atas bara api atau gril. Daging ayam biasanya sebelumnya telah dibumbui dengan campuran kecap manis, bawang putih, bawang merah, dan rempah-rempah lainnya."
-            ),  Menu(
-                menuName = "Sate Ayam Pedas",
-                menuPrice = 30000.0,
-                menuImg = R.drawable.iv_fried_rice,
-                menuDesc = "Sate ayam adalah hidangan yang terbuat dari potongan daging ayam yang ditusuk dengan tusukan bambu atau sate, kemudian dipanggang di atas bara api atau gril. Daging ayam biasanya sebelumnya telah dibumbui dengan campuran kecap manis, bawang putih, bawang merah, dan rempah-rempah lainnya."
-            ),        Menu(
-                menuName = "Sate Ayam Asin",
-                menuPrice = 30000.0,
-                menuImg = R.drawable.iv_fried_rice,
-                menuDesc = "Sate ayam adalah hidangan yang terbuat dari potongan daging ayam yang ditusuk dengan tusukan bambu atau sate, kemudian dipanggang di atas bara api atau gril. Daging ayam biasanya sebelumnya telah dibumbui dengan campuran kecap manis, bawang putih, bawang merah, dan rempah-rempah lainnya."
+                menuDesc = "Nasi goreng merupakan sajian nasi yang digoreng dalam sebuah wajan atau penggorengan yang menghasilkan cita rasa berbeda karena dicampur dengan bumbu-bumbu seperti garam, bawang putih, bawang merah, merica, rempah-rempah tertentu dan kecap manis."
+            ) ,  Menu(
+                menuName = "Ayam Bakar Mantab Jiwa",
+                menuPrice =23000.0,
+                menuImg = R.drawable.iv_griiled_chicken,
+                menuDesc = "Ayam bakar adalah hidangan dari potongan ayam dipanggang atau dibakar hingga matang dan memiliki cita rasa manis, pedas, dan beraroma rempah."
             ),
+            Menu(
+                menuName = "Nasi Goreng Spesial",
+                menuPrice = 15000.0,
+                menuImg = R.drawable.iv_fried_rice,
+                menuDesc = "Nasi goreng merupakan sajian nasi yang digoreng dalam sebuah wajan atau penggorengan yang menghasilkan cita rasa berbeda karena dicampur dengan bumbu-bumbu seperti garam, bawang putih, bawang merah, merica, rempah-rempah tertentu dan kecap manis."
+            )
         )
     }
 }

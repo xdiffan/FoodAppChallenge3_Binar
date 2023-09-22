@@ -1,4 +1,19 @@
 <resources>
     <string name="app_name">FoodAppChallenge3</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="location">Jl. BSD Green Office Park Jl. BSD Grand Boulevard, Sampora, BSD, Kabupaten Tangerang,</string>
+    <string name="rupiah" formatted="false">Rp%d</string>
+    <string name="add_to_cart" formatted="false">Tambah ke Keranjang - Rp%d</string>
+    <string name="nasi">Nasi</string>
+    <string name="rp_80000">Rp.80000</string>
+    <string name="lokasi">lokasi</string>
+    <string name="add_to_price">Tambah ke Keranjang - Rp. 80000</string>
+    <string name="txt_hitung">Hitung</string>
+    <string name="txt_ayam_goyeng">Ayam Goyeng</string>
+    <string name="txt_no_telp">0812345678910</string>
+    <string name="txt_greetings">Hi Binarian !</string>
+    <string name="txt_greetings_2">Mau makan apa hari ini ?</string>
+    <string name="txt_discount">DISKON 20%</string>
+    <string name="txt_under_discount">pesan makanan lewat aplikasi dan dapatkan diskonmu</string>
+    <string name="txt_list_food">List Menu Makanan</string>
 </resources>
