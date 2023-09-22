@@ -1,52 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/white"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:background="@color/yellow">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginVertical="24dp"
         android:id="@+id/cl_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginVertical="24dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
+
         <TextView
             android:id="@+id/tv_grettings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="Hi Binarian !"
             style="@style/TextAppearance.Material3.TitleLarge"
+            android:layout_width="115dp"
+            android:layout_height="36dp"
+            android:text="@string/txt_greetings"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TextSizeCheck" />
+
         <TextView
-            style="@style/TextAppearance.Material3.TitleSmall"
             android:id="@+id/tv_grettings_2"
+            style="@style/TextAppearance.Material3.TitleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mau makan apa hari ini ?"
+            android:text="@string/txt_greetings_2"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_grettings"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_grettings" />
+
         <ImageView
             android:id="@+id/iv_profile_pict"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:src="@drawable/iv_icon_profile_pict"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/iv_icon_profile_pict"/>
+            tools:ignore="ContentDescription" />
+
         <ImageView
             android:id="@+id/iv_shopping"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginHorizontal="16dp"
+            android:src="@drawable/iv_icon_shopping"
             app:layout_constraintEnd_toStartOf="@id/iv_profile_pict"
             app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/iv_icon_shopping"/>
+            tools:ignore="ContentDescription" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_banner"
         android:layout_width="wrap_content"
@@ -69,7 +79,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/iv_food_for_banner" />
+                    android:src="@drawable/iv_food_for_banner"
+                    tools:ignore="ContentDescription" />
 
                 <View
                     android:layout_width="match_parent"
@@ -86,7 +97,8 @@
                     android:src="@drawable/iv_discount_twenty"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -102,7 +114,7 @@
                         style="@style/TextAppearance.Material3.TitleLarge"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="DISKON 20%"
+                        android:text="@string/txt_discount"
                         android:textColor="@color/white"
                         android:textSize="28sp"
                         android:textStyle="bold" />
@@ -110,7 +122,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="pesan makanan lewat aplikasi dan dapatkan diskonmu"
+                        android:text="@string/txt_under_discount"
                         android:textColor="@color/white"
                         android:textSize="14sp" />
 
@@ -121,56 +133,62 @@
         </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cl_banner"
-        tools:itemCount="4"
-        android:layout_marginHorizontal="18dp"
+        tools:itemCount="5"
         tools:listitem="@layout/category_item" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_list_food"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="24dp"
-        android:id="@+id/cl_list_food"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rv_category">
+
         <TextView
-            style="@style/TextAppearance.Material3.TitleMedium"
             android:id="@+id/tv_list_food_text"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            style="@style/TextAppearance.Material3.TitleMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="List Menu Makanan"/>
-        <ImageView
-            app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/txt_list_food"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/switch_list_grid"
+            style="@style/Widget.Material3.CompoundButton.Switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="20dp"
-            android:src="@drawable/iv_icon_list"
-            android:layout_height="30dp"/>
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_menu"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:padding="24dp"
         android:clipToPadding="false"
         android:nestedScrollingEnabled="false"
+        android:padding="24dp"
         android:scrollbars="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cl_list_food"
         tools:itemCount="4"
         tools:listitem="@layout/menu_grid_item"
-        tools:spanCount="2">
-    </androidx.recyclerview.widget.RecyclerView>
+        tools:spanCount="2"></androidx.recyclerview.widget.RecyclerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

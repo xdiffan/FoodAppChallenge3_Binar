@@ -8,15 +8,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.challenge.foodappchallenge3.R
 import com.challenge.foodappchallenge3.model.Category
-
-
 class CategoryListAdapter(
-    val categoryList: List<Category>
+    private val categoryList: List<Category>
 ) : RecyclerView.Adapter<CategoryListAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tvCatName = itemView.findViewById<TextView>(R.id.tv_category_name)
-        val ivCatImg = itemView.findViewById<ImageView>(R.id.iv_category_image)
+        val tvCategoryName: TextView = itemView.findViewById(R.id.tv_category_name)
+        val ivCategoryImg:ImageView= itemView.findViewById(R.id.iv_category_image)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -25,8 +23,8 @@ class CategoryListAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.tvCatName.setText(categoryList[position].catName)
-        holder.ivCatImg.setImageResource(categoryList[position].catImgSrc)
+        holder.tvCategoryName.text = categoryList[position].categoryName
+        holder.ivCategoryImg.setImageResource(categoryList[position].categoryImgSrc)
     }
 
     override fun getItemCount(): Int {

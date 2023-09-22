@@ -8,5 +8,19 @@
         tools:layout="@layout/fragment_home"
         android:id="@+id/fragmentHome"
         android:name="com.challenge.foodappchallenge3.presentation.fragmenthome.FragmentHome"
-        android:label="FragmentHome" />
+        android:label="FragmentHome" >
+        <action
+            android:id="@+id/action_fragmentHome_to_fragmentDetail"
+            app:destination="@id/fragmentDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentDetail"
+        android:name="com.challenge.foodappchallenge3.presentation.fragmentdetail.FragmentDetail"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="menu"
+            app:argType="com.challenge.foodappchallenge3.model.Menu"
+            app:nullable="true" />
+    </fragment>
 </navigation>

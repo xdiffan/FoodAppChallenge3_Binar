@@ -5,12 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.challenge.foodappchallenge3.core.ViewHolderBinder
 import com.challenge.foodappchallenge3.databinding.MenuGridItemBinding
+import com.challenge.foodappchallenge3.databinding.MenuListItemBinding
 import com.challenge.foodappchallenge3.model.Menu
 
 class MenuListAdapter(
+    var adapterLayoutMode: AdapterLayoutMode,
     private val onItemClick: (Menu) -> Unit,
-) : RecyclerView.Adapter<MenuItemGridViewHolder>() {
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
     private val differ = AsyncListDiffer(this,
         object : DiffUtil.ItemCallback<Menu>() {
             override fun areItemsTheSame(
@@ -28,30 +32,47 @@ class MenuListAdapter(
             }
         })
 
-    fun setData(data: List<Menu>) {
-        differ.submitList(data)
-        notifyItemRangeChanged(0, data.size)
-    }
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): MenuItemGridViewHolder {
-        return MenuItemGridViewHolder(
-            binding = MenuGridItemBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent, false
-            ),
-            onItemClick = onItemClick
-        )
+    ): RecyclerView.ViewHolder {
+        return when (viewType){
+            AdapterLayoutMode.GRID.ordinal -> {
+                MenuItemGridViewHolder(
+                    binding = MenuGridItemBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    ),
+                    onItemClick
+                )
+            }
+            else -> {
+                MenuItemLinearViewHolder(
+                    binding = MenuListItemBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    ),
+                    onItemClick
+                )
+            }
+        }
     }
-
+    override fun getItemViewType(position: Int): Int {
+        return adapterLayoutMode.ordinal
+    }
+    fun setData(data: List<Menu>) {
+        differ.submitList(data)
+    }
     override fun onBindViewHolder(
-        holder: MenuItemGridViewHolder,
+        holder: RecyclerView.ViewHolder,
         position: Int,
     ) {
-        holder.bind(differ.currentList[position])
+        (holder as ViewHolderBinder<Menu>).bind(differ.currentList[position])
     }
-
     override fun getItemCount(): Int = differ.currentList.size
+    fun refreshList() {
+        notifyItemRangeChanged(0,differ.currentList.size)
+    }
 }

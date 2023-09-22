@@ -15,9 +15,11 @@
         android:layout_height="140dp"
         android:src="@drawable/iv_mie"
         android:scaleType="centerCrop"
-     />
+        tools:ignore="ContentDescription" />
     <TextView
         android:id="@+id/tv_menu_name"
+        style="@style/TextAppearance.Material3.TitleSmall"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="2dp"

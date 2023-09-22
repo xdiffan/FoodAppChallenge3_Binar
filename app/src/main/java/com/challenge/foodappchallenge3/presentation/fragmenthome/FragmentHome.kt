@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.challenge.foodappchallenge3.R
 import com.challenge.foodappchallenge3.data.MenuDataSource
-import com.challenge.foodappchallenge3.data.MenuDataSourceImpl
+import com.challenge.foodappchallenge3.data.MenuDataSourceImplementation
 import com.challenge.foodappchallenge3.databinding.FragmentHomeBinding
 import com.challenge.foodappchallenge3.model.Category
 import com.challenge.foodappchallenge3.model.Menu
@@ -20,21 +22,23 @@ class FragmentHome : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
 
-    private val dataSource : MenuDataSource by lazy { MenuDataSourceImpl() }
+    private val dataSource : MenuDataSource by lazy { MenuDataSourceImplementation() }
 
     private val adapter: MenuListAdapter by lazy {
-        MenuListAdapter(::navigateToDetail)
+        MenuListAdapter(AdapterLayoutMode.LINEAR){
+                menu: Menu -> navigateToDetail(menu)
+        }
     }
-
-    private fun navigateToDetail(menu: Menu) {
-        TODO("Not yet implemented")
+    private fun navigateToDetail(menu: Menu? = null) {
+        val action = FragmentHomeDirections.actionFragmentHomeToFragmentDetail(menu)
+        findNavController().navigate(action)
     }
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentHomeBinding.inflate(inflater,container,false)
         return binding.root
     }
@@ -44,24 +48,24 @@ class FragmentHome : Fragment() {
 
         setRecyclerViewCategory()
         setRecyclerViewMenu()
+        setModeButton()
     }
-
     private fun setRecyclerViewMenu() {
-
-        binding.rvMenu.adapter = adapter
-
-        val layoutManagerMenu = FlexboxLayoutManager(requireContext())
-        layoutManagerMenu.flexDirection = FlexDirection.ROW
-        layoutManagerMenu.justifyContent = JustifyContent.SPACE_BETWEEN
-        binding.rvMenu.layoutManager = layoutManagerMenu
-
+        val span = if(adapter.adapterLayoutMode == AdapterLayoutMode.LINEAR) 1 else 2
+        binding.rvMenu.apply {
+            layoutManager = GridLayoutManager(requireContext(),span)
+            adapter = this@FragmentHome.adapter
+        }
         adapter.setData(dataSource.getMenuData())
-
     }
-
+    private fun setModeButton() {
+        binding.switchListGrid.setOnCheckedChangeListener { _, isChecked ->
+            (binding.rvMenu.layoutManager as GridLayoutManager).spanCount = if (isChecked) 2 else 1
+            adapter.adapterLayoutMode = if(isChecked) AdapterLayoutMode.GRID else AdapterLayoutMode.LINEAR
+            adapter.refreshList()
+        }
+    }
     private fun setRecyclerViewCategory() {
-
-        // Add Category List
         val categoryList = mutableListOf(
             Category("Nasi", R.drawable.iv_fried_rice),
             Category("Mie", R.drawable.iv_mie),
@@ -69,7 +73,6 @@ class FragmentHome : Fragment() {
             Category("Minuman", R.drawable.iv_drink),
 
         )
-
         // Create Adapter
         val recyclerViewAdapterCategory = CategoryListAdapter(categoryList)
 
