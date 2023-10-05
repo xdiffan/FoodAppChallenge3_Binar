@@ -1,4 +1,4 @@
-package com.challenge.foodappchallenge3.main
+package com.challenge.foodappchallenge3.presentation.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
