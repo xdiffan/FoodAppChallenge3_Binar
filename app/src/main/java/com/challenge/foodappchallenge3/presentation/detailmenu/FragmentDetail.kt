@@ -1,4 +1,4 @@
-package com.challenge.foodappchallenge3.presentation.fragmentdetail
+package com.challenge.foodappchallenge3.presentation.detailmenu
 
 import android.content.Intent
 import android.net.Uri
@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import coil.load
 import com.challenge.foodappchallenge3.R
 import com.challenge.foodappchallenge3.databinding.FragmentDetailBinding
 import com.challenge.foodappchallenge3.model.Menu
@@ -45,7 +46,7 @@ class FragmentDetail : Fragment() {
     }
     private fun showProfileData() {
         if(menu != null){
-            binding.ivImgMenuItemDetail.setImageResource(menu?.menuImg!!)
+            binding.ivImgMenuItemDetail.load(menu!!.menuImg)
             binding.tvMenuName.text = menu?.menuName
             binding.tvMenuPrice.text = getString(R.string.rupiah,menu?.menuPrice?.toInt())
             binding.tvMenuDesc.text = menu?.menuDesc

@@ -58,7 +58,8 @@ dependencies {
     implementation("com.google.android.flexbox:flexbox:3.0.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.2")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.2")
-
+//    image loader
+    implementation("io.coil-kt:coil:2.4.0")
 
 
 }

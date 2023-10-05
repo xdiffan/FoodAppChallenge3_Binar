@@ -16,4 +16,7 @@
     <string name="txt_discount">DISKON 20%</string>
     <string name="txt_under_discount">pesan makanan lewat aplikasi dan dapatkan diskonmu</string>
     <string name="txt_list_food">List Menu Makanan</string>
+    <string name="title_tab_home">home</string>
+    <string name="title_tab_cart">cart</string>
+    <string name="title_tab_profile">profile</string>
 </resources>

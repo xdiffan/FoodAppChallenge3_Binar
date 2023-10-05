@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.challenge.foodappchallenge3.R
 import com.challenge.foodappchallenge3.data.MenuDataSource
 import com.challenge.foodappchallenge3.data.MenuDataSourceImplementation
 import com.challenge.foodappchallenge3.databinding.FragmentHomeBinding
@@ -67,10 +66,10 @@ class FragmentHome : Fragment() {
     }
     private fun setRecyclerViewCategory() {
         val categoryList = mutableListOf(
-            Category("Nasi", R.drawable.iv_fried_rice),
-            Category("Mie", R.drawable.iv_mie),
-            Category("Snack", R.drawable.iv_snack),
-            Category("Minuman", R.drawable.iv_drink),
+            Category("Nasi", "https://raw.githubusercontent.com/xdiffan/Asset-Challenge-FoodApp/main/iv_rice.webp"),
+            Category("Mie", "https://raw.githubusercontent.com/xdiffan/Asset-Challenge-FoodApp/main/iv_mie.webp"),
+            Category("Snack", "https://raw.githubusercontent.com/xdiffan/Asset-Challenge-FoodApp/main/iv_snack.webp"),
+            Category("Minuman", "https://raw.githubusercontent.com/xdiffan/Asset-Challenge-FoodApp/main/iv_drink.webp")
 
         )
         // Create Adapter

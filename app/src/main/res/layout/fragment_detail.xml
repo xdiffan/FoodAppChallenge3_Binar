@@ -5,22 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/yellow"
-    tools:context=".presentation.fragmentdetail.FragmentDetail">
-
-    <ImageView
-        android:id="@+id/iv_img_menu_item_detail"
-        android:layout_width="match_parent"
-        android:layout_height="320dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@id/cl_menu_detail"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/iv_fried_rice"
-        tools:ignore="ContentDescription" />
-
+    tools:context=".presentation.detailmenu.FragmentDetail">
     <ImageView
         android:id="@+id/ib_arrow_back"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
         android:background="@android:color/transparent"
@@ -28,6 +17,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/iv_img_menu_item_detail"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_marginTop="6dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@id/ib_arrow_back"
+        app:layout_constraintTop_toTopOf="@id/cl_menu_detail"
+        tools:src="@drawable/iv_fried_rice"
+        tools:ignore="ContentDescription" />
+
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_menu_detail"
@@ -157,11 +159,12 @@
             app:layout_constraintBottom_toTopOf="@id/btn_add_to_cart"
             app:layout_constraintTop_toBottomOf="@id/view_line_2">
 
+
             <ImageView
-                android:id="@+id/ic_add"
+                android:id="@+id/ic_minus"
                 android:layout_width="34dp"
                 android:layout_height="34dp"
-                android:src="@drawable/iv_ic_add"
+                android:src="@drawable/iv_ic_minus"
                 tools:ignore="ContentDescription" />
 
             <TextView
@@ -172,13 +175,14 @@
                 android:layout_marginHorizontal="16dp"
                 android:text="@string/txt_hitung"
                 android:textColor="@color/black" />
-
             <ImageView
-                android:id="@+id/ic_minus"
+                android:id="@+id/ic_add"
                 android:layout_width="34dp"
                 android:layout_height="34dp"
-                android:src="@drawable/iv_ic_minus"
+                android:src="@drawable/iv_ic_add"
                 tools:ignore="ContentDescription" />
+
+
 
         </LinearLayout>
         <Button
