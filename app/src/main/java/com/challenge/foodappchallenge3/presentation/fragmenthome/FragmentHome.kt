@@ -1,17 +1,18 @@
 package com.challenge.foodappchallenge3.presentation.fragmenthome
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.challenge.foodappchallenge3.data.MenuDataSource
 import com.challenge.foodappchallenge3.data.MenuDataSourceImplementation
 import com.challenge.foodappchallenge3.databinding.FragmentHomeBinding
 import com.challenge.foodappchallenge3.model.Category
 import com.challenge.foodappchallenge3.model.Menu
+import com.challenge.foodappchallenge3.presentation.detailmenu.DetailMenuActivity
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
@@ -29,8 +30,12 @@ class FragmentHome : Fragment() {
         }
     }
     private fun navigateToDetail(menu: Menu? = null) {
-        val action = FragmentHomeDirections.actionFragmentHomeToFragmentDetail(menu)
-        findNavController().navigate(action)
+//        val action = FragmentHomeDirections.actionFragmentHomeToFragmentDetail(menu)
+//        findNavController().navigate(action)
+        val action=Intent(requireContext(),DetailMenuActivity::class.java)
+        action.putExtra("menu",menu)
+        startActivity(action)
+
     }
 
 
