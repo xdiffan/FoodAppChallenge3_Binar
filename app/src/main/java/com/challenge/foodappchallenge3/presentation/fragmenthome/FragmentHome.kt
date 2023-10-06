@@ -7,10 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import com.challenge.foodappchallenge3.data.CategoryDataSource
+import com.challenge.foodappchallenge3.data.CategoryDataSourceImplementation
 import com.challenge.foodappchallenge3.data.MenuDataSource
 import com.challenge.foodappchallenge3.data.MenuDataSourceImplementation
 import com.challenge.foodappchallenge3.databinding.FragmentHomeBinding
-import com.challenge.foodappchallenge3.model.Category
 import com.challenge.foodappchallenge3.model.Menu
 import com.challenge.foodappchallenge3.presentation.detailmenu.DetailMenuActivity
 import com.google.android.flexbox.FlexDirection
@@ -22,23 +23,22 @@ class FragmentHome : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
 
-    private val dataSource : MenuDataSource by lazy { MenuDataSourceImplementation() }
-
+    private val menuDataSource : MenuDataSource by lazy { MenuDataSourceImplementation() }
+    private val categoryDataSource:CategoryDataSource by lazy { CategoryDataSourceImplementation() }
     private val adapter: MenuListAdapter by lazy {
         MenuListAdapter(AdapterLayoutMode.LINEAR){
                 menu: Menu -> navigateToDetail(menu)
         }
     }
+    private val adapterCategory:CategoryListAdapter by lazy {
+        CategoryListAdapter()
+    }
     private fun navigateToDetail(menu: Menu? = null) {
-//        val action = FragmentHomeDirections.actionFragmentHomeToFragmentDetail(menu)
-//        findNavController().navigate(action)
         val action=Intent(requireContext(),DetailMenuActivity::class.java)
         action.putExtra("menu",menu)
         startActivity(action)
 
     }
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,7 +49,6 @@ class FragmentHome : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setRecyclerViewCategory()
         setRecyclerViewMenu()
         setModeButton()
@@ -60,7 +59,7 @@ class FragmentHome : Fragment() {
             layoutManager = GridLayoutManager(requireContext(),span)
             adapter = this@FragmentHome.adapter
         }
-        adapter.setData(dataSource.getMenuData())
+        adapter.setData(menuDataSource.getMenuData())
     }
     private fun setModeButton() {
         binding.switchListGrid.setOnCheckedChangeListener { _, isChecked ->
@@ -70,28 +69,12 @@ class FragmentHome : Fragment() {
         }
     }
     private fun setRecyclerViewCategory() {
-        val categoryList = mutableListOf(
-            Category("Nasi", "https://raw.githubusercontent.com/xdiffan/Asset-Challenge-FoodApp/main/iv_rice.webp"),
-            Category("Mie", "https://raw.githubusercontent.com/xdiffan/Asset-Challenge-FoodApp/main/iv_mie.webp"),
-            Category("Snack", "https://raw.githubusercontent.com/xdiffan/Asset-Challenge-FoodApp/main/iv_snack.webp"),
-            Category("Minuman", "https://raw.githubusercontent.com/xdiffan/Asset-Challenge-FoodApp/main/iv_drink.webp")
-
-        )
-        // Create Adapter
-        val recyclerViewAdapterCategory = CategoryListAdapter(categoryList)
-
-        // Create Layout Manager
-        val layoutManagerCategory = FlexboxLayoutManager(requireContext())
-        layoutManagerCategory.flexDirection = FlexDirection.ROW
-        layoutManagerCategory.justifyContent = JustifyContent.SPACE_BETWEEN
-
-        // Create RecyclerView
-        val recyclerViewCategory = binding.rvCategory
-
-        // Set LayoutManager on RecyclerView
-        recyclerViewCategory.layoutManager = layoutManagerCategory
-
-        // Set Adapter on RecyclerView
-        recyclerViewCategory.adapter = recyclerViewAdapterCategory
+        binding.rvCategory.apply {
+            layoutManager = FlexboxLayoutManager(requireContext())
+            (layoutManager as FlexboxLayoutManager).flexDirection = FlexDirection.ROW
+            (layoutManager as FlexboxLayoutManager).justifyContent = JustifyContent.SPACE_BETWEEN
+            adapter = adapterCategory
+            adapterCategory.setData(categoryDataSource.getCategoryData())
+        }
     }
 }

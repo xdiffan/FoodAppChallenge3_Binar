@@ -1,34 +1,58 @@
 package com.challenge.foodappchallenge3.presentation.fragmenthome
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
-import com.challenge.foodappchallenge3.R
+import com.challenge.foodappchallenge3.core.ViewHolderBinder
+import com.challenge.foodappchallenge3.databinding.CategoryItemBinding
 import com.challenge.foodappchallenge3.model.Category
-class CategoryListAdapter(
-    private val categoryList: List<Category>
-) : RecyclerView.Adapter<CategoryListAdapter.MyViewHolder>() {
 
-    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tvCategoryName: TextView = itemView.findViewById(R.id.tv_category_name)
-       val ivCategoryImg:ImageView= itemView.findViewById(R.id.iv_category_image)
+
+class CategoryListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    private val differ = AsyncListDiffer(this,
+        object : DiffUtil.ItemCallback<Category>() {
+            override fun areItemsTheSame(
+                oldItem: Category,
+                newItem: Category,
+            ): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(
+                oldItem: Category,
+                newItem: Category,
+            ): Boolean {
+                return oldItem.hashCode() == newItem.hashCode()
+            }
+        })
+
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): RecyclerView.ViewHolder {
+        return CategoryItemViewHolder(
+            binding = CategoryItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.category_item, parent,false)
-        return MyViewHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.tvCategoryName.text = categoryList[position].categoryName
-        holder.ivCategoryImg.load(categoryList[position].categoryImgSrc)
-    }
-
     override fun getItemCount(): Int {
-        return categoryList.size
+        return differ.currentList.size
     }
+    override fun onBindViewHolder(
+        holder: RecyclerView.ViewHolder,
+        position: Int,
+    ) {
+        (holder as ViewHolderBinder<Category>).bind(differ.currentList[position])
+    }
+    fun setData(data: List<Category>) {
+        differ.submitList(data)
+    }
+
 }
