@@ -7,22 +7,10 @@
     <fragment
         tools:layout="@layout/fragment_home"
         android:id="@+id/fragmentHome"
-        android:name="com.challenge.foodappchallenge3.presentation.fragmenthome.FragmentHome"
+        android:name="com.challenge.foodappchallenge3.presentation.home.FragmentHome"
         android:label="FragmentHome" >
-        <action
-            android:id="@+id/action_fragmentHome_to_fragmentDetail"
-            app:destination="@id/fragmentDetail" />
     </fragment>
-    <fragment
-        android:id="@+id/fragmentDetail"
-        android:name="com.challenge.foodappchallenge3.presentation.detailmenu.FragmentDetail"
-        android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" >
-        <argument
-            android:name="menu"
-            app:argType="com.challenge.foodappchallenge3.model.Menu"
-            app:nullable="true" />
-    </fragment>
+
     <fragment
         android:id="@+id/fragmentCart"
         android:name="com.challenge.foodappchallenge3.presentation.cart.FragmentCart"

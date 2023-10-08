@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    android:padding="20dp"
+    android:background="@drawable/iv_rounded_corner"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_menu_img"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="6dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toStartOf="@id/ll_menu_name_and_price"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/iv_mie" />
+
+    <LinearLayout
+        android:id="@+id/ll_menu_name_and_price"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="14dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginVertical="6dp"
+        app:layout_constraintStart_toEndOf="@id/iv_menu_img"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_menu_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="textStart"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="Mie Jumbo Naruto"/>
+        <TextView
+            android:id="@+id/tv_menu_price"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            android:text="IDR 5000"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_amount_controller"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/et_notes"
+        android:layout_marginHorizontal="14dp"
+        app:layout_constraintStart_toEndOf="@id/iv_menu_img"
+        app:layout_constraintTop_toBottomOf="@id/ll_menu_name_and_price">
+
+        <ImageView
+            android:id="@+id/ic_minus"
+            android:layout_width="24dp"
+            android:layout_height="32dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/iv_ic_minus" />
+
+        <TextView
+            android:id="@+id/tv_counting"
+            style="@style/TextAppearance.Material3.TitleLarge"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="8dp"
+            android:text="0"
+            android:textColor="@color/black" />
+
+        <ImageView
+            android:id="@+id/ic_add"
+            android:layout_width="22dp"
+            android:layout_height="32dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/iv_ic_add" />
+        <TextView
+            android:id="@+id/tv_menu_price_total"
+            android:layout_width="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:text="IDR 1500000"/>
+
+    </LinearLayout>
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_notes"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:hint="Note"
+        android:background="@drawable/iv_rounded_corner"
+        android:maxLength="50"
+        android:maxLines="1"
+        android:minHeight="48dp"
+        android:layout_marginStart="14dp"
+        android:singleLine="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_menu_img"
+        app:layout_constraintTop_toBottomOf="@id/ll_amount_controller" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_notes" />
+    <ImageView
+        android:id="@+id/ic_trash"
+        android:layout_width="26dp"
+        android:layout_height="32dp"
+
+        android:layout_marginVertical="22dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_trash"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

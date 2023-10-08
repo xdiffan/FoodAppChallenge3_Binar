@@ -1,4 +1,4 @@
-package com.challenge.foodappchallenge3.presentation.fragmenthome
+package com.challenge.foodappchallenge3.presentation.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,8 +11,7 @@ import com.challenge.foodappchallenge3.databinding.CategoryItemBinding
 import com.challenge.foodappchallenge3.model.Category
 
 
-class CategoryListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
+class CategoryListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     private val differ = AsyncListDiffer(this,
         object : DiffUtil.ItemCallback<Category>() {
             override fun areItemsTheSame(
@@ -29,28 +28,25 @@ class CategoryListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 return oldItem.hashCode() == newItem.hashCode()
             }
         })
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
     ): RecyclerView.ViewHolder {
         return CategoryItemViewHolder(
-            binding = CategoryItemBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
+            binding = CategoryItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         )
     }
     override fun getItemCount(): Int {
         return differ.currentList.size
     }
+
     override fun onBindViewHolder(
         holder: RecyclerView.ViewHolder,
         position: Int,
     ) {
         (holder as ViewHolderBinder<Category>).bind(differ.currentList[position])
     }
+
     fun setData(data: List<Category>) {
         differ.submitList(data)
     }

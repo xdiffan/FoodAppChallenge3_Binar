@@ -1,83 +1,109 @@
 package com.challenge.foodappchallenge3.presentation.detailmenu
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import coil.load
 import com.challenge.foodappchallenge3.R
+import com.challenge.foodappchallenge3.data.local.database.AppDatabase
+import com.challenge.foodappchallenge3.data.local.database.datasource.CartDataSource
+import com.challenge.foodappchallenge3.data.local.database.datasource.CartDatabaseDataSource
+import com.challenge.foodappchallenge3.data.repository.CartRepository
+import com.challenge.foodappchallenge3.data.repository.CartRepositoryImpl
 import com.challenge.foodappchallenge3.databinding.ActivityDetailMenuBinding
 import com.challenge.foodappchallenge3.model.Menu
+import com.challenge.foodappchallenge3.utils.GenericViewModelFactory
+import com.challenge.foodappchallenge3.utils.proceedWhen
+import com.challenge.foodappchallenge3.utils.toCurrencyFormat
 
 class DetailMenuActivity : AppCompatActivity() {
-    private val binding:ActivityDetailMenuBinding by lazy {
+    private val binding: ActivityDetailMenuBinding by lazy {
         ActivityDetailMenuBinding.inflate(
-            layoutInflater)
+            layoutInflater
+        )
     }
-    private val menu:Menu?by lazy {
-        intent.getParcelableExtra("menu")
-    }
-    override fun onCreate( savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-        showProfileData()
-        mapsClickListener()
-        popBackStack()
-        countingClickListener()
-        count=0
-    }
-    private fun popBackStack() {
-        binding.ibArrowBack.setOnClickListener {
-            super.onBackPressed()
-        }
-    }
-    private fun showProfileData() {
-        if(menu != null){
-            binding.ivImgMenuItemDetail.load(menu!!.menuImg)
-            binding.tvMenuName.text = menu?.menuName
-            binding.tvMenuPrice.text = getString(R.string.rupiah,menu?.menuPrice?.toInt())
-            binding.tvMenuDesc.text = menu?.menuDesc
-            binding.tvLocationDetail.text = getString(R.string.location)
-            binding.btnAddToCart.text = getString(R.string.add_to_cart, menu?.menuPrice?.toInt())
-        } else{
-            Toast.makeText(this, "Menu is null", Toast.LENGTH_SHORT).show()
-        }
+    private val viewModel: DetailMenuViewModel by viewModels {
+
+        val database = AppDatabase.getInstance(this)
+        val cartDao = database.cartDao()
+        val cartDataSource: CartDataSource = CartDatabaseDataSource(cartDao)
+        val repo: CartRepository = CartRepositoryImpl(cartDataSource)
+        GenericViewModelFactory.create(DetailMenuViewModel(intent?.extras,repo))
     }
 
-    private fun mapsClickListener() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+        bindMenu(viewModel.menu)
+        observeData()
+        setClickListener()
+    }
+
+    private fun setClickListener() {
         binding.cvLocation.setOnClickListener {
             navigateToGoogleMaps()
         }
+        binding.icAdd.setOnClickListener {
+            viewModel.add()
+        }
+        binding.icMinus.setOnClickListener {
+            viewModel.minus()
+        }
+        binding.ibArrowBack.setOnClickListener {
+            onBackPressed()
+        }
+        binding.btnAddToCart.setOnClickListener{
+            viewModel.addToCart()
+        }
     }
+
+    private fun observeData() {
+        viewModel.priceLiveData.observe(this) {
+            binding.btnAddToCart.text = it.toCurrencyFormat()
+        }
+        viewModel.menuCountLiveData.observe(this) {
+            binding.tvCounting.text = it.toString()
+        }
+
+        viewModel.addToCartResult.observe(this) {
+            it.proceedWhen(
+                doOnSuccess = {
+                    Toast.makeText(this, "Pesanan Ditambahkan ke Keranjang !", Toast.LENGTH_SHORT).show()
+                    finish()
+                }, doOnError = {
+                    Toast.makeText(this, it.exception?.message.orEmpty(), Toast.LENGTH_SHORT).show()
+                })
+        }
+    }
+
+    private fun bindMenu(menu: Menu?) {
+        menu?.let {
+            binding.ivImgMenuItemDetail.load(it.menuImg)
+            binding.tvMenuName.text = it.menuName
+            binding.tvMenuPrice.text = getString(R.string.rupiah, it.menuPrice.toInt())
+            binding.tvMenuDesc.text = it.menuDesc
+            binding.tvLocationDetail.text = getString(R.string.location)
+            binding.btnAddToCart.text = getString(R.string.add_to_cart,it.menuPrice.toInt())
+        }
+    }
+
     private fun navigateToGoogleMaps() {
         val mapIntent = Intent(Intent.ACTION_VIEW, Uri.parse("geo:-6.3016,$106.65337"))
         mapIntent.setPackage("com.google.android.apps.maps")
         startActivity(mapIntent)
     }
-    private var count: Int? = null
-    private fun countingClickListener() {
-        binding.icAdd.setOnClickListener{
-            incrementCount()
-        }
-        binding.icMinus.setOnClickListener{
-            decrementCount()
+
+    companion object {
+        const val EXTRA_PRODUCT = "EXTRA_PRODUCT"
+        fun startActivity(context: Context, menu: Menu) {
+            val intent = Intent(context, DetailMenuActivity::class.java)
+            intent.putExtra(EXTRA_PRODUCT, menu)
+            context.startActivity(intent)
         }
     }
 
-    private fun incrementCount() {
-        count=(count?:0)+1
-        binding.tvCounting.text = count.toString()
-        val total = (menu?.menuPrice?.toInt() ?: 0) * (count ?: 0)
-        binding.btnAddToCart.text = getString(R.string.add_to_cart,total)
-    }
-
-    private fun decrementCount() {
-        count = (count ?: 0) - 1
-        if ((count ?: 0) <= 0) return
-        binding.tvCounting.text = (count.toString())
-        val total = (menu?.menuPrice?.toInt() ?: 0) * (count ?: 0)
-        binding.btnAddToCart.text =
-            getString(R.string.add_to_cart, total)
-    }
 }

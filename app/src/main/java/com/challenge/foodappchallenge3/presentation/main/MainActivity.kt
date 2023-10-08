@@ -12,11 +12,13 @@ class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
-        binding.bottomNavView.setupWithNavController(navHostFragment.navController)
+        setBottomNav()
     }
+        private fun setBottomNav(){
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
+        binding.bottomNavView.setupWithNavController(navHostFragment.navController)}
+
 }

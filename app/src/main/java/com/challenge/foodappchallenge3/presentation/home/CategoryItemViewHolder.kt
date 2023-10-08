@@ -1,4 +1,4 @@
-package com.challenge.foodappchallenge3.presentation.fragmenthome
+package com.challenge.foodappchallenge3.presentation.home
 
 import androidx.recyclerview.widget.RecyclerView
 import coil.load

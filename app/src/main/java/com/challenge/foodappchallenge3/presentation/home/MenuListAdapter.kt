@@ -1,4 +1,4 @@
-package com.challenge.foodappchallenge3.presentation.fragmenthome
+package com.challenge.foodappchallenge3.presentation.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -72,7 +72,5 @@ class MenuListAdapter(
         (holder as ViewHolderBinder<Menu>).bind(differ.currentList[position])
     }
     override fun getItemCount(): Int = differ.currentList.size
-    fun refreshList() {
-        notifyItemRangeChanged(0,differ.currentList.size)
-    }
+
 }
