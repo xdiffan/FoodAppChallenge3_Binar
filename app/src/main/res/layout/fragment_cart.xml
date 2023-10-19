@@ -13,11 +13,11 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:textAlignment="center"
-        android:textSize="26dp"
+        android:textSize="26sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="Keranjang"
+        android:text="@string/txt_cart"
         app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -62,7 +62,7 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_marginHorizontal="30dp"
-                android:text="Total Harga"
+                android:text="@string/txt_total_price"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toTopOf="@id/tv_total_price_amount"
                 app:layout_constraintEnd_toStartOf="@id/btn_checkout"
@@ -88,7 +88,7 @@
                 android:layout_height="40dp"
                 android:textColor="@color/white"
                 android:background="@drawable/iv_rounded_corner"
-                android:text="Pesan"
+                android:text="@string/txt_checkout"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

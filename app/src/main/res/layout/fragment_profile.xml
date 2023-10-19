@@ -43,98 +43,85 @@
             android:contentDescription="Profile Picture"
             android:layout_marginVertical="24dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <LinearLayout
-        android:id="@+id/ll_username"
+    <include
+        android:id="@+id/layout_form"
+        layout="@layout/layout_user_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="32dp"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/cl_header"
-        app:layout_constraintStart_toStartOf="parent">
-        <TextView
-            style="@style/TextAppearance.Material3.TitleMedium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="6dp"
-            android:text="Username"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Asepgaming33"
-            style="@style/TextAppearance.Material3.TitleSmall"
-            android:background="@drawable/iv_rounded_corner"/>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/ll_pasword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="12dp"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/ll_username"
-        app:layout_constraintStart_toStartOf="parent">
-        <TextView
-            style="@style/TextAppearance.Material3.TitleMedium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="6dp"
-            android:text="Password"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="********"
-            style="@style/TextAppearance.Material3.TitleSmall"
-            android:background="@drawable/iv_rounded_corner"/>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/ll_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="12dp"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/ll_pasword"
-        app:layout_constraintStart_toStartOf="parent">
-        <TextView
-            style="@style/TextAppearance.Material3.TitleMedium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="6dp"
-            android:text="Email"/>
+        android:layout_margin="16dp"
+        app:layout_constraintTop_toBottomOf="@id/cl_header" />
 
-        <TextView
-            style="@style/TextAppearance.Material3.TitleSmall"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/iv_rounded_corner"
-            android:text="bambangsudono@gmail.com"/>
-    </LinearLayout>
     <LinearLayout
-        android:id="@+id/ll_telp"
+        android:id="@+id/ll_update_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="12dp"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/ll_email"
-        app:layout_constraintStart_toStartOf="parent">
-        <TextView
-            style="@style/TextAppearance.Material3.TitleMedium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="6dp"
-            android:text="Telephone"/>
-        <TextView
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintBottom_toBottomOf="@id/btn_logout"
+        app:layout_constraintTop_toBottomOf="@id/layout_form">
+
+        <FrameLayout
+            android:id="@+id/fl_change_profile_btn_loading_state"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="+62876543210"
-            style="@style/TextAppearance.Material3.TitleSmall"
-            android:background="@drawable/iv_rounded_corner"/>
+            android:layout_weight="1"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/btn_change_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:background="@color/yellow"
+                style="@style/TextAppearance.Material3.TitleMedium"
+                android:text="Change Name" />
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/pb_change_profile_loading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminate="true"
+                android:visibility="gone" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_change_password_btn_loading_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/btn_change_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/yellow"
+                android:textAlignment="center"
+                style="@style/TextAppearance.Material3.TitleMedium"
+                android:text="Change Password" />
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/pb_change_password_loading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminate="true"
+                android:visibility="gone" />
+        </FrameLayout>
+
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/btn_logout"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/red"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Logout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_update_profile" />
 </androidx.constraintlayout.widget.ConstraintLayout>
