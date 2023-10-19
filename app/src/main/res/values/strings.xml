@@ -21,4 +21,28 @@
     <string name="title_tab_home">home</string>
     <string name="title_tab_cart">cart</string>
     <string name="title_tab_profile">profile</string>
+    <string name="txt_register">Register</string>
+    <string name="txt_error_password_empty">Password tidak boleh kosong !</string>
+    <string name="txt_error_email_empty">Email tidak boleh kosong !</string>
+    <string name="txt_error_email_invalid">Penulisan email tidak sesuai format !</string>
+    <string name="txt_error_password_less_than_8_char">Password tidak boleh kurang dari 8 karakter !</string>
+    <string name="register_here">Register here</string>
+    <string name="txt_password_not_matches">Password yg dimasukkan tidak sama !</string>
+    <string name="txt_cart">Keranjang</string>
+    <string name="txt_checkout">Pesan</string>
+    <string name="txt_total_price">Total Harga</string>
+    <string name="txt_note">Note</string>
+    <string name="txt_0">0</string>
+    <string name="txt_mie_jumbo_naruto">Mie Jumbo Naruto</string>
+    <string name="txt_price">IDR 5000</string>
+    <string name="txt_price_total">IDR 1500000</string>
+    <string name="txt_tidak_ada_data">Tidak ada data</string>
+    <string name="txt_login">Login</string>
+    <string name="txt_confirm_password">Confirm Password</string>
+    <string name="txt_email">Email</string>
+    <string name="txt_name">Name</string>
+    <string name="txt_password">Password</string>
+    <string name="txt_already_have_an_account_click_here">Already have an account? click here</string>
+    <string name="txt_button_register">Register</string>
+
 </resources>
