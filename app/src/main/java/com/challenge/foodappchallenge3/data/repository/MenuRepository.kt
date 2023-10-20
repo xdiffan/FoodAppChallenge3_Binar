@@ -1,31 +1,36 @@
 package com.challenge.foodappchallenge3.data.repository
 
-import com.challenge.foodappchallenge3.data.dummy.DummyCategoryDataSource
-import com.challenge.foodappchallenge3.data.local.database.datasource.MenuDataSource
-import com.challenge.foodappchallenge3.data.local.database.mapper.toMenuList
+
+import com.challenge.foodappchallenge3.data.network.api.datasource.RestaurantDataSource
+import com.challenge.foodappchallenge3.data.network.api.model.category.toCategoryList
+import com.challenge.foodappchallenge3.data.network.api.model.menu.toMenuList
 import com.challenge.foodappchallenge3.model.Category
 import com.challenge.foodappchallenge3.model.Menu
 import com.challenge.foodappchallenge3.utils.ResultWrapper
-import com.challenge.foodappchallenge3.utils.proceed
+
+import com.challenge.foodappchallenge3.utils.proceedFlow
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+
 
 
 interface MenuRepository {
-    fun getCategories(): List<Category>
-    fun getMenus(): Flow<ResultWrapper<List<Menu>>>
+    fun getCategories(): Flow<ResultWrapper<List<Category>>>
+    fun getMenus(category: String? = null): Flow<ResultWrapper<List<Menu>>>
 }
 
-class MenuRepositoryImplementation(
-    private val menuDataSource: MenuDataSource,
-    private val dummyCategoryDataSource: DummyCategoryDataSource
+class MenuRepositoryImpl(
+    private val apiDataSource: RestaurantDataSource
 ) : MenuRepository {
-
-    override fun getCategories(): List<Category> {
-        return dummyCategoryDataSource.getCategoryData()
+    override fun getCategories(): Flow<ResultWrapper<List<Category>>> {
+        return proceedFlow {
+            apiDataSource.getCategories().data?.toCategoryList() ?: emptyList()
+        }
     }
 
-    override fun getMenus(): Flow<ResultWrapper<List<Menu>>> {
-        return menuDataSource.getAllMenus().map { proceed { it.toMenuList() } }
+    override fun getMenus(category: String?): Flow<ResultWrapper<List<Menu>>> {
+        return proceedFlow {
+            apiDataSource.getMenus(category).data?.toMenuList() ?: emptyList()
+        }
     }
+
 }

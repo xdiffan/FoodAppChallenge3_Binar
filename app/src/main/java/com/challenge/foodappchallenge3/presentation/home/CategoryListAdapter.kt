@@ -11,7 +11,7 @@ import com.challenge.foodappchallenge3.databinding.CategoryItemBinding
 import com.challenge.foodappchallenge3.model.Category
 
 
-class CategoryListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class CategoryListAdapter ( private val onItemClick: (Category) -> Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     private val differ = AsyncListDiffer(this,
         object : DiffUtil.ItemCallback<Category>() {
             override fun areItemsTheSame(
@@ -28,12 +28,11 @@ class CategoryListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
                 return oldItem.hashCode() == newItem.hashCode()
             }
         })
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int,
-    ): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryItemViewHolder {
         return CategoryItemViewHolder(
-            binding = CategoryItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+            binding = CategoryItemBinding.inflate(
+                LayoutInflater.from(parent.context), parent, false
+            ), onItemClick
         )
     }
     override fun getItemCount(): Int {

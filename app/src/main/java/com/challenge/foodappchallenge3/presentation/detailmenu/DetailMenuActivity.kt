@@ -84,7 +84,7 @@ class DetailMenuActivity : AppCompatActivity() {
         menu?.let {
             binding.ivImgMenuItemDetail.load(it.menuImg)
             binding.tvMenuName.text = it.menuName
-            binding.tvMenuPrice.text = getString(R.string.rupiah, it.menuPrice.toInt())
+            binding.tvMenuPrice.text = it.menuPrice.toCurrencyFormat()
             binding.tvMenuDesc.text = it.menuDesc
             binding.tvLocationDetail.text = getString(R.string.location)
             binding.btnAddToCart.text = getString(R.string.add_to_cart,it.menuPrice.toInt())

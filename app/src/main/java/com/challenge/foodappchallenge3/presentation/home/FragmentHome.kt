@@ -1,6 +1,7 @@
 package com.challenge.foodappchallenge3.presentation.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,14 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.challenge.foodappchallenge3.R
-import com.challenge.foodappchallenge3.data.dummy.DummyCategoryDataSource
-import com.challenge.foodappchallenge3.data.dummy.DummyCategoryDataSourceImplementation
-import com.challenge.foodappchallenge3.data.local.database.AppDatabase
-import com.challenge.foodappchallenge3.data.local.database.datasource.MenuDatabaseDataSource
 import com.challenge.foodappchallenge3.data.local.datastore.UserPreferenceDataSourceImpl
 import com.challenge.foodappchallenge3.data.local.datastore.appDataStore
+import com.challenge.foodappchallenge3.data.network.api.datasource.RestaurantApiDataSource
+import com.challenge.foodappchallenge3.data.network.api.service.RestaurantService
 import com.challenge.foodappchallenge3.data.repository.MenuRepository
-import com.challenge.foodappchallenge3.data.repository.MenuRepositoryImplementation
+import com.challenge.foodappchallenge3.data.repository.MenuRepositoryImpl
 import com.challenge.foodappchallenge3.databinding.FragmentHomeBinding
 import com.challenge.foodappchallenge3.model.Menu
 import com.challenge.foodappchallenge3.presentation.detailmenu.DetailMenuActivity
@@ -33,7 +32,7 @@ class FragmentHome : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
 
-    private val dummyCategoryDataSource : DummyCategoryDataSource by lazy { DummyCategoryDataSourceImplementation() }
+
 
     private val adapterMenu: MenuListAdapter by lazy {
         MenuListAdapter(AdapterLayoutMode.LINEAR){
@@ -42,7 +41,9 @@ class FragmentHome : Fragment() {
     }
 
     private val adapterCategory: CategoryListAdapter by lazy {
-        CategoryListAdapter()
+        CategoryListAdapter{
+            homeViewModel.getMenus(it.categoryName.lowercase())
+        }
     }
 
     private val viewModel: MainViewModel by viewModels{
@@ -53,12 +54,15 @@ class FragmentHome : Fragment() {
     }
 
     private val homeViewModel: HomeViewModel by viewModels {
-        val cds: DummyCategoryDataSource = DummyCategoryDataSourceImplementation()
-        val database = AppDatabase.getInstance(requireContext())
-        val menuDao = database.menuDao()
-        val menuDataSource = MenuDatabaseDataSource(menuDao)
-        val repo: MenuRepository = MenuRepositoryImplementation(menuDataSource, cds)
+        val service = RestaurantService.invoke()
+        val menuDataSource = RestaurantApiDataSource(service)
+        val repo: MenuRepository = MenuRepositoryImpl(menuDataSource)
         GenericViewModelFactory.create(HomeViewModel(repo))
+    }
+
+    private fun getData(){
+        homeViewModel.getCategories()
+        homeViewModel.getMenus()
     }
     private fun navigateToDetail(menu: Menu) {
         DetailMenuActivity.startActivity(requireContext(), menu)
@@ -73,19 +77,21 @@ class FragmentHome : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setRecyclerViewCategory()
+        getData()
         setRecyclerViewMenu()
         setModeButton()
     }
+
     private fun setObserveData() {
-        homeViewModel.menuData.observe(viewLifecycleOwner){ it ->
+        homeViewModel.menus.observe(viewLifecycleOwner){
             it.proceedWhen(
                 doOnSuccess = { result ->
                     binding.layoutState.root.isVisible = false
                     binding.layoutState.pbLoading.isVisible = false
                     binding.layoutState.tvError.isVisible = false
                     binding.rvMenu.isVisible = true
-                    result.payload?.let {
-                        adapterMenu.setData(it)
+                    result.payload?.let {menu->
+                        adapterMenu.setData(menu)
                     }
                 },
                 doOnLoading = {
@@ -106,6 +112,32 @@ class FragmentHome : Fragment() {
                     binding.layoutState.tvError.isVisible = true
                     binding.layoutState.tvError.text = getString(R.string.error_empty)
                     binding.rvMenu.isVisible = false
+                }
+            )
+        }
+        homeViewModel.categories.observe(viewLifecycleOwner) {
+            it.proceedWhen(
+                doOnSuccess = { result ->
+                    binding.rvCategory.isVisible = true
+                    binding.layoutState.tvError.isVisible = false
+                    binding.layoutState.pbLoading.isVisible = false
+                    Log.e("JDAR", "Aw you found me!")
+
+                    result.payload?.let { category ->
+                        adapterCategory.setData(category)
+                    }
+                },
+                doOnLoading = {
+                    binding.layoutState.root.isVisible = true
+                    binding.layoutState.pbLoading.isVisible = true
+                    binding.rvCategory.isVisible = false
+                },
+                doOnError = {
+                    binding.layoutState.root.isVisible = true
+                    binding.layoutState.pbLoading.isVisible = false
+                    binding.layoutState.tvError.isVisible = true
+                    binding.layoutState.tvError.text = it.exception?.message.orEmpty()
+                    binding.rvCategory.isVisible = false
                 }
             )
         }
@@ -138,8 +170,8 @@ class FragmentHome : Fragment() {
             layoutManager = FlexboxLayoutManager(requireContext())
             (layoutManager as FlexboxLayoutManager).flexDirection = FlexDirection.ROW
             (layoutManager as FlexboxLayoutManager).justifyContent = JustifyContent.SPACE_BETWEEN
-            adapter = adapterCategory
-            adapterCategory.setData(dummyCategoryDataSource.getCategoryData())
+            adapter = this@FragmentHome.adapterCategory
+            setObserveData()
         }
     }
 }
