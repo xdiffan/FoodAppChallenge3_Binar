@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1022616899240",
+    "project_id": "foodappchallenge-diffan",
+    "storage_bucket": "foodappchallenge-diffan.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1022616899240:android:46925795ac4fa766eefc9d",
+        "android_client_info": {
+          "package_name": "com.challenge.foodappchallenge3"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4Wwp8hZ5QukSv1Z-vEPLHPGEcg0FPIgQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

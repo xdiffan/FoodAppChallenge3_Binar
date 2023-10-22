@@ -12,7 +12,7 @@
     <string name="total_qty">x%s</string>
     <string name="txt_ayam_goyeng">Ayam Goyeng</string>
     <string name="txt_no_telp">0812345678910</string>
-    <string name="txt_greetings">Hi Binarian !</string>
+    <string name="txt_greetings">Hi </string>
     <string name="error_empty">Anda Belum Memesan Apapun</string>
     <string name="txt_greetings_2">Mau makan apa hari ini ?</string>
     <string name="txt_discount">DISKON 20%</string>
@@ -22,6 +22,7 @@
     <string name="title_tab_cart">cart</string>
     <string name="title_tab_profile">profile</string>
     <string name="txt_register">Register</string>
+    <string name="txt_here">here</string>
     <string name="txt_error_password_empty">Password tidak boleh kosong !</string>
     <string name="txt_error_email_empty">Email tidak boleh kosong !</string>
     <string name="txt_error_email_invalid">Penulisan email tidak sesuai format !</string>
@@ -44,5 +45,6 @@
     <string name="txt_password">Password</string>
     <string name="txt_already_have_an_account_click_here">Already have an account? click here</string>
     <string name="txt_button_register">Register</string>
+    <string name="txt_change">Change</string>
 
 </resources>

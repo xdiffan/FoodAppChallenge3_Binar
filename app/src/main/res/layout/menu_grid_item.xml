@@ -9,13 +9,18 @@
     android:layout_marginHorizontal="6dp"
     android:gravity="center"
     android:orientation="vertical">
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="12dp">
     <ImageView
         android:id="@+id/iv_menu_image"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:src="@drawable/iv_mie"
         android:scaleType="centerCrop"
         tools:ignore="ContentDescription" />
+    </androidx.cardview.widget.CardView>
     <TextView
         android:id="@+id/tv_menu_name"
         style="@style/TextAppearance.Material3.TitleSmall"

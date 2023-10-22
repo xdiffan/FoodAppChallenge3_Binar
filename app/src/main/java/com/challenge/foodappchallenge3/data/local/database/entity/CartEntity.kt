@@ -8,8 +8,14 @@ import androidx.room.PrimaryKey
 data class CartEntity(
     @PrimaryKey(autoGenerate = true)
     var id: Int? = null,
-    @ColumnInfo(name = "menu_id")
-    var menuId : Int = 0,
+    @ColumnInfo(name="menu_id")
+    var menuId: Int = 0,
+    @ColumnInfo(name = "menu_name")
+    val menuName: String,
+    @ColumnInfo(name = "menu_price")
+    val menuPrice: Double,
+    @ColumnInfo(name = "menu_img")
+    val menuImgUrl: String,
     @ColumnInfo(name = "item_quantity")
     var itemQuantity: Int = 0,
     @ColumnInfo(name = "item_notes")

@@ -22,104 +22,115 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/iv_ic_back" />
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_marginHorizontal="70dp"
-            android:textSize="20sp"
             style="@style/TextAppearance.Material3.TitleLarge"
-            android:textStyle="bold"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Konfirmasi Pesanan"/>
+            android:layout_marginHorizontal="70dp"
+            android:text="Konfirmasi Pesanan"
+            android:textSize="20sp"
+            android:textStyle="bold" />
     </LinearLayout>
+
     <TextView
         android:id="@+id/tv_send_method"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:text="Metode Pengiriman"
-        android:layout_marginVertical="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/ll_confirm"
         android:layout_marginHorizontal="28dp"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:layout_marginVertical="16dp"
+        android:text="Metode Pengiriman"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_confirm" />
+
     <LinearLayout
         android:id="@+id/ll_send_method"
         android:layout_width="match_parent"
-        android:background="@drawable/iv_rounded_corner"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
-        android:padding="15dp"
         android:layout_marginTop="6dp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_send_method"
-        app:layout_constraintStart_toStartOf="parent">
+        android:background="@drawable/iv_rounded_corner"
+        android:padding="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_send_method">
+
         <TextView
+            style="@style/TextAppearance.Material3.BodyMedium"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            android:textColor="@color/black"
-            android:layout_height="wrap_content"
-            style="@style/TextAppearance.Material3.BodyMedium"
-            android:text="Ambil Sendiri"/>
+            android:text="Ambil Sendiri"
+            android:textColor="@color/black" />
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_marginStart="170dp"
-            android:textColor="@color/black"
             style="@style/TextAppearance.Material3.BodyMedium"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dikirim"/>
+            android:layout_marginStart="170dp"
+            android:text="Dikirim"
+            android:textColor="@color/black" />
     </LinearLayout>
+
     <TextView
         android:id="@+id/tv_payment_method"
         android:layout_width="wrap_content"
-        android:textStyle="bold"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="28dp"
+        android:layout_marginVertical="16dp"
         android:text="Metode Pembayaran"
         android:textColor="@color/black"
-        android:layout_marginVertical="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/ll_send_method"
-        android:layout_marginHorizontal="28dp"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_send_method" />
+
     <LinearLayout
         android:id="@+id/ll_payment_method"
         android:layout_width="match_parent"
-        android:background="@drawable/iv_rounded_corner"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
-        android:padding="15dp"
         android:layout_marginTop="6dp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_payment_method"
-        app:layout_constraintStart_toStartOf="parent">
+        android:background="@drawable/iv_rounded_corner"
+        android:padding="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_payment_method">
+
         <TextView
+            style="@style/TextAppearance.Material3.BodyMedium"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            style="@style/TextAppearance.Material3.BodyMedium"
-            android:text="Tunai"/>
+            android:text="Tunai"
+            android:textColor="@color/black" />
+
         <TextView
-            android:layout_width="wrap_content"
-            android:textColor="@color/black"
-            android:layout_marginStart="220dp"
             style="@style/TextAppearance.Material3.BodyMedium"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="E-Wallet"/>
+            android:layout_marginStart="220dp"
+            android:text="E-Wallet"
+            android:textColor="@color/black" />
     </LinearLayout>
+
     <TextView
         android:id="@+id/tv_check_order"
         android:layout_width="wrap_content"
-        android:textStyle="bold"
-        android:textColor="@color/black"
         android:layout_height="wrap_content"
-        android:text="Cek Pesanan"
-        android:layout_marginVertical="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/ll_payment_method"
         android:layout_marginHorizontal="28dp"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:layout_marginVertical="8dp"
+        android:text="Cek Pesanan"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_payment_method" />
 
     <include
         android:id="@+id/layout_state"
         layout="@layout/common_layout_content_state"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -137,29 +148,6 @@
             android:layout_marginHorizontal="16dp"
             android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_checkout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="8dp"
-                android:layout_marginHorizontal="8dp"
-                android:background="@color/white"
-                android:orientation="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:itemCount="2"
-                tools:listitem="@layout/checkout_list_item" />
-
-
-            <TextView
-                android:id="@+id/tv_title_shopping_summary"
-                style="@style/TextAppearance.Material3.BodyLarge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginVertical="16dp"
-                android:textStyle="bold"
-                android:text="Ringkasan Pembayaran"
-                android:textColor="@color/black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -186,6 +174,18 @@
                     tools:text="IDR 30000" />
 
             </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_checkout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="8dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="2"
+                tools:listitem="@layout/checkout_list_item" />
 
         </LinearLayout>
 

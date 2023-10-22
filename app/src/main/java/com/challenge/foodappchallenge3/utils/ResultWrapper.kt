@@ -1,6 +1,6 @@
 package com.challenge.foodappchallenge3.utils
 
-import kotlinx.coroutines.delay
+
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -62,6 +62,6 @@ suspend fun <T> proceed(block: suspend () -> T): ResultWrapper<T> {
         emit(ResultWrapper.Error(exception = Exception(e)))
     }.onStart {
         emit(ResultWrapper.Loading())
-        delay(2000)
+
     }
 }

@@ -10,7 +10,7 @@ data class OrderItemRequest (
     @SerializedName("qty")
     val qty: Int?,
     @SerializedName("catatan")
-    val note: Int?,
+    val note: String?,
     @SerializedName("harga")
-    val price: Int?
+    val price: Double?
 )

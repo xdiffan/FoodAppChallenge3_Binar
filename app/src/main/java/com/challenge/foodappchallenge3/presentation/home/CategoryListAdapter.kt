@@ -18,7 +18,7 @@ class CategoryListAdapter ( private val onItemClick: (Category) -> Unit): Recycl
                 oldItem: Category,
                 newItem: Category,
             ): Boolean {
-                return oldItem.id == newItem.id
+                return oldItem.categoryName == newItem.categoryName
             }
 
             override fun areContentsTheSame(

@@ -16,6 +16,7 @@ import com.challenge.foodappchallenge3.databinding.ActivityLoginBinding
 import com.challenge.foodappchallenge3.presentation.main.MainActivity
 import com.challenge.foodappchallenge3.presentation.register.RegisterActivity
 import com.challenge.foodappchallenge3.utils.GenericViewModelFactory
+import com.challenge.foodappchallenge3.utils.highLightWord
 import com.challenge.foodappchallenge3.utils.proceedWhen
 import com.google.firebase.auth.FirebaseAuth
 
@@ -68,7 +69,7 @@ class LoginActivity : AppCompatActivity() {
                     binding.btnLogin.isEnabled = true
                     Toast.makeText(
                         this,
-                        "Login Failed: ${it.exception?.message.orEmpty()}",
+                        "Login Failed: Anda belum punya akun ",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -86,7 +87,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setClickListeners() {
 
-        binding.tvNavToRegister.setOnClickListener{
+        binding.tvNavToRegister.highLightWord(getString(R.string.txt_here)){
             navigateToRegister()
         }
 

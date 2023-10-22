@@ -9,6 +9,8 @@ import com.challenge.foodappchallenge3.R
 import com.challenge.foodappchallenge3.data.local.database.AppDatabase
 import com.challenge.foodappchallenge3.data.local.database.datasource.CartDataSource
 import com.challenge.foodappchallenge3.data.local.database.datasource.CartDatabaseDataSource
+import com.challenge.foodappchallenge3.data.network.api.datasource.RestaurantApiDataSource
+import com.challenge.foodappchallenge3.data.network.api.service.RestaurantService
 import com.challenge.foodappchallenge3.data.repository.CartRepository
 import com.challenge.foodappchallenge3.data.repository.CartRepositoryImpl
 import com.challenge.foodappchallenge3.databinding.ActivityCheckoutBinding
@@ -25,8 +27,10 @@ class CheckoutActivity : AppCompatActivity() {
         val cartDao = database.cartDao()
         val cartDataSource: CartDataSource =
             CartDatabaseDataSource(cartDao)
+        val service= RestaurantService.invoke()
+        val restaurantApiDataSource= RestaurantApiDataSource(service)
         val repo: CartRepository =
-            CartRepositoryImpl(cartDataSource)
+            CartRepositoryImpl(cartDataSource,restaurantApiDataSource)
         GenericViewModelFactory.create(
             CheckoutViewModel(repo)
         )
