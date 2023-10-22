@@ -12,6 +12,8 @@ import com.challenge.foodappchallenge3.R
 import com.challenge.foodappchallenge3.data.local.database.AppDatabase
 import com.challenge.foodappchallenge3.data.local.database.datasource.CartDataSource
 import com.challenge.foodappchallenge3.data.local.database.datasource.CartDatabaseDataSource
+import com.challenge.foodappchallenge3.data.network.api.datasource.RestaurantApiDataSource
+import com.challenge.foodappchallenge3.data.network.api.service.RestaurantService
 import com.challenge.foodappchallenge3.data.repository.CartRepository
 import com.challenge.foodappchallenge3.data.repository.CartRepositoryImpl
 import com.challenge.foodappchallenge3.databinding.ActivityDetailMenuBinding
@@ -31,7 +33,10 @@ class DetailMenuActivity : AppCompatActivity() {
         val database = AppDatabase.getInstance(this)
         val cartDao = database.cartDao()
         val cartDataSource: CartDataSource = CartDatabaseDataSource(cartDao)
-        val repo: CartRepository = CartRepositoryImpl(cartDataSource)
+
+        val service= RestaurantService.invoke()
+        val restaurantApiDataSource= RestaurantApiDataSource(service)
+        val repo: CartRepository = CartRepositoryImpl(cartDataSource,restaurantApiDataSource)
         GenericViewModelFactory.create(DetailMenuViewModel(intent?.extras,repo))
     }
 
@@ -92,7 +97,7 @@ class DetailMenuActivity : AppCompatActivity() {
     }
 
     private fun navigateToGoogleMaps() {
-        val mapIntent = Intent(Intent.ACTION_VIEW, Uri.parse("geo:-6.3016,$106.65337"))
+        val mapIntent = Intent(Intent.ACTION_VIEW, Uri.parse("geo:-6.301079121233476, 106.65341320967701"))
         mapIntent.setPackage("com.google.android.apps.maps")
         startActivity(mapIntent)
     }

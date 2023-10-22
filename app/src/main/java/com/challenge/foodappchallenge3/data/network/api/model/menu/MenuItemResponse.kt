@@ -6,6 +6,8 @@ import com.google.gson.annotations.SerializedName
 
 @Keep
 data class MenuItemResponse(
+    @SerializedName("id")
+    val id: Int?,
     @SerializedName("alamat_resto")
     val restaurantAddress: String?,
     @SerializedName("detail")
@@ -21,6 +23,7 @@ data class MenuItemResponse(
 )
 
 fun MenuItemResponse.toMenu() = Menu(
+    id=this.id?:0,
     menuName = this.name.orEmpty(),
     menuPrice = this.price?:0.0,
     menuImg = this.imageUrl.orEmpty(),

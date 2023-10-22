@@ -5,28 +5,29 @@ import coil.load
 import com.challenge.foodappchallenge3.R
 import com.challenge.foodappchallenge3.core.ViewHolderBinder
 import com.challenge.foodappchallenge3.databinding.CheckoutListItemBinding
+import com.challenge.foodappchallenge3.model.Cart
 import com.challenge.foodappchallenge3.model.CartMenu
 import com.challenge.foodappchallenge3.utils.toCurrencyFormat
 
 class CheckoutViewHolder(
     private val binding: CheckoutListItemBinding,
-) : RecyclerView.ViewHolder(binding.root), ViewHolderBinder<CartMenu> {
-    override fun bind(item: CartMenu) {
+) : RecyclerView.ViewHolder(binding.root), ViewHolderBinder<Cart> {
+    override fun bind(item: Cart) {
         setCartData(item)
     }
 
-    private fun setCartData(item: CartMenu) {
+    private fun setCartData(item: Cart) {
         with(binding) {
-            ivMenuImg.load(item.menu.menuImg) {
+            ivMenuImg.load(item.menuImgUrl) {
                 crossfade(true)
             }
             tvTotalItem.text =
                 itemView.rootView.context.getString(
                     R.string.total_qty,
-                    item.cart.itemQuantity.toString()
+                    item.itemQuantity.toString()
                 )
-            tvMenuName.text = item.menu.menuName
-            tvMenuPrice.text =item.menu.menuPrice .toCurrencyFormat()
+            tvMenuName.text = item.menuName
+            tvMenuPrice.text =item.menuPrice .toCurrencyFormat()
         }
     }
 

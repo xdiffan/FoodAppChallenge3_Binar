@@ -16,6 +16,7 @@ import com.challenge.foodappchallenge3.databinding.ActivityRegisterBinding
 import com.challenge.foodappchallenge3.presentation.login.LoginActivity
 import com.challenge.foodappchallenge3.presentation.main.MainActivity
 import com.challenge.foodappchallenge3.utils.GenericViewModelFactory
+import com.challenge.foodappchallenge3.utils.highLightWord
 import com.challenge.foodappchallenge3.utils.proceedWhen
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
@@ -44,7 +45,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun setClickListeners() {
-        binding.tvNavToLogin.setOnClickListener{
+        binding.tvNavToLogin.highLightWord(getString(R.string.txt_here)){
             navigateToLogin()
         }
 
