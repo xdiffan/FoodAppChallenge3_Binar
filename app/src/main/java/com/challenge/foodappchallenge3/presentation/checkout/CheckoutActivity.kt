@@ -1,6 +1,7 @@
 package com.challenge.foodappchallenge3.presentation.checkout
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -27,19 +28,17 @@ class CheckoutActivity : AppCompatActivity() {
         val cartDao = database.cartDao()
         val cartDataSource: CartDataSource =
             CartDatabaseDataSource(cartDao)
-        val service= RestaurantService.invoke()
-        val restaurantApiDataSource= RestaurantApiDataSource(service)
+        val service = RestaurantService.invoke()
+        val restaurantApiDataSource = RestaurantApiDataSource(service)
         val repo: CartRepository =
-            CartRepositoryImpl(cartDataSource,restaurantApiDataSource)
+            CartRepositoryImpl(cartDataSource, restaurantApiDataSource)
         GenericViewModelFactory.create(
             CheckoutViewModel(repo)
         )
     }
 
     private val binding: ActivityCheckoutBinding by lazy {
-        ActivityCheckoutBinding.inflate(
-            layoutInflater
-        )
+        ActivityCheckoutBinding.inflate(layoutInflater)
     }
 
     private val adapter: CartListAdapter by lazy {
@@ -53,22 +52,51 @@ class CheckoutActivity : AppCompatActivity() {
         observeData()
         setClickListener()
     }
-    private fun setClickListener(){
+
+    private fun observeData() {
+        observeCartData()
+        observeCheckOutResult()
+    }
+
+    private fun observeCheckOutResult() {
+        viewModel.checkoutResult.observe(this){
+            it.proceedWhen(
+                doOnSuccess = {
+                    binding.layoutState.root.isVisible=false
+                    binding.layoutState.pbLoading.isVisible=false
+                    showDialogCheckOutSuccess()
+                },
+                doOnError = {
+                    binding.layoutState.root.isVisible=false
+                    binding.layoutState.pbLoading.isVisible=false
+                    Toast.makeText(this,"Checkout Error",Toast.LENGTH_SHORT).show()
+                },
+                doOnLoading = {
+                    binding.layoutState.root.isVisible=true
+                    binding.layoutState.pbLoading.isVisible=true
+                }
+            )
+        }
+    }
+
+    private fun showDialogCheckOutSuccess() {
+        AlertDialog.Builder(this)
+            .setMessage("Order Berhasil")
+            .setPositiveButton(getString(R.string.txt_back_to_cart)){_,_->
+                viewModel.clearCart()
+                finish()
+            }.create().show()
+    }
+
+    private fun setClickListener() {
         binding.btnOrder.setOnClickListener {
-            dialogOrder()
-            viewModel.deleteAll()
+            viewModel.order()
         }
         binding.ivBack.setOnClickListener {
             onBackPressed()
         }
     }
 
-    private fun dialogOrder() {
-        AlertDialog.Builder(this)
-            .setTitle("Order Berhasil")
-            .setPositiveButton("Kembali ke Keranjang") { _, _ -> finish() }
-            .show()
-    }
 
 
 
@@ -76,7 +104,7 @@ class CheckoutActivity : AppCompatActivity() {
         binding.rvCheckout.adapter = adapter
     }
 
-    private fun observeData() {
+    private fun observeCartData() {
         viewModel.cartList.observe(this) {
             it.proceedWhen(
                 doOnSuccess = { result ->

@@ -46,5 +46,6 @@
     <string name="txt_already_have_an_account_click_here">Already have an account? click here</string>
     <string name="txt_button_register">Register</string>
     <string name="txt_change">Change</string>
+    <string name="txt_back_to_cart">Kembali ke keranjang</string>
 
 </resources>

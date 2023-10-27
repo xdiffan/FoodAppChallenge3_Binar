@@ -56,8 +56,8 @@ class FragmentHome : Fragment() {
 
     private val homeViewModel: HomeViewModel by viewModels {
         val service = RestaurantService.invoke()
-        val menuDataSource = RestaurantApiDataSource(service)
-        val repo: MenuRepository = MenuRepositoryImpl(menuDataSource)
+        val restaurantApiDataSource = RestaurantApiDataSource(service)
+        val repo: MenuRepository = MenuRepositoryImpl(restaurantApiDataSource)
         val firebaseAuth = FirebaseAuth.getInstance()
         val dataSource = FirebaseAuthDataSourceImpl(firebaseAuth)
         val userRepo = UserRepositoryImpl(dataSource)
