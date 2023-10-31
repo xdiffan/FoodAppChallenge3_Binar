@@ -4,17 +4,14 @@ import com.challenge.foodappchallenge3.data.local.database.datasource.CartDataSo
 import com.challenge.foodappchallenge3.data.local.database.entity.CartEntity
 import com.challenge.foodappchallenge3.data.local.database.mapper.toCartEntity
 import com.challenge.foodappchallenge3.data.local.database.mapper.toCartList
-import com.challenge.foodappchallenge3.data.network.api.datasource.RestaurantApiDataSource
 import com.challenge.foodappchallenge3.data.network.api.datasource.RestaurantDataSource
 import com.challenge.foodappchallenge3.data.network.api.model.order.OrderItemRequest
 import com.challenge.foodappchallenge3.data.network.api.model.order.OrderRequest
-
 import com.challenge.foodappchallenge3.model.Cart
 import com.challenge.foodappchallenge3.model.Menu
 import com.challenge.foodappchallenge3.utils.ResultWrapper
 import com.challenge.foodappchallenge3.utils.proceed
 import com.challenge.foodappchallenge3.utils.proceedFlow
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
@@ -29,13 +26,11 @@ interface CartRepository {
     suspend fun deleteCart(item: Cart): Flow<ResultWrapper<Boolean>>
     suspend fun deleteAll()
     suspend fun order(items: List<Cart>): Flow<ResultWrapper<Boolean>>
-
-
 }
 
 class CartRepositoryImpl(
     private val dataSource: CartDataSource,
-    private val restaurantApiDataSource: RestaurantApiDataSource
+    private val restaurantApiDataSource: RestaurantDataSource
 ) : CartRepository {
     override fun getCartList(): Flow<ResultWrapper<Pair<List<Cart>, Double>>> {
         return dataSource.getAllCarts().map {
@@ -49,10 +44,11 @@ class CartRepositoryImpl(
                 Pair(cartList, totalPrice)
             }
         }.map {
-            if (it.payload?.first?.isEmpty() == true)
+            if (it.payload?.first?.isEmpty() == true) {
                 ResultWrapper.Empty(it.payload)
-            else
+            } else {
                 it
+            }
         }.onStart {
             emit(ResultWrapper.Loading())
         }
@@ -60,7 +56,7 @@ class CartRepositoryImpl(
 
     override suspend fun createCart(
         menu: Menu,
-        totalQuantity: Int,
+        totalQuantity: Int
     ): Flow<ResultWrapper<Boolean>> {
         return menu.id?.let { menuId ->
             proceedFlow {
@@ -123,6 +119,4 @@ class CartRepositoryImpl(
             restaurantApiDataSource.createOrder(orderRequest).status == true
         }
     }
-
-
 }

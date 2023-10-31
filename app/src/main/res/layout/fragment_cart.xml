@@ -18,7 +18,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:text="@string/txt_cart"
-        app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge" />
+        app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge"
+        tools:ignore="VisualLintOverlap" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_cart"
@@ -85,10 +86,10 @@
             <Button
                 android:id="@+id/btn_checkout"
                 android:layout_width="150dp"
-                android:layout_height="40dp"
-                android:textColor="@color/white"
+                android:layout_height="48dp"
                 android:background="@drawable/iv_rounded_corner"
                 android:text="@string/txt_checkout"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

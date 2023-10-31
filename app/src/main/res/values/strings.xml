@@ -1,14 +1,11 @@
 <resources>
     <string name="app_name">FoodAppChallenge3</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="location">Jl. BSD Green Office Park Jl. BSD Grand Boulevard, Sampora, BSD, Kabupaten Tangerang,</string>
-    <string name="rupiah" formatted="false">Rp%d</string>
     <string name="add_to_cart" formatted="false">Tambah ke Keranjang - Rp%d</string>
     <string name="nasi">Nasi</string>
     <string name="rp_80000">Rp.80000</string>
     <string name="lokasi">lokasi</string>
     <string name="add_to_price">Tambah ke Keranjang - Rp. 80000</string>
-    <string name="txt_hitung">Hitung</string>
     <string name="total_qty">x%s</string>
     <string name="txt_ayam_goyeng">Ayam Goyeng</string>
     <string name="txt_no_telp">0812345678910</string>
@@ -21,7 +18,6 @@
     <string name="title_tab_home">home</string>
     <string name="title_tab_cart">cart</string>
     <string name="title_tab_profile">profile</string>
-    <string name="txt_register">Register</string>
     <string name="txt_here">here</string>
     <string name="txt_error_password_empty">Password tidak boleh kosong !</string>
     <string name="txt_error_email_empty">Email tidak boleh kosong !</string>
@@ -47,5 +43,21 @@
     <string name="txt_button_register">Register</string>
     <string name="txt_change">Change</string>
     <string name="txt_back_to_cart">Kembali ke keranjang</string>
+    <string name="txt_konfirmasi_pesanan">Konfirmasi Pesanan</string>
+    <string name="txt_ambil_sendiri">Ambil Sendiri</string>
+    <string name="txt_dikirim">Dikirim</string>
+    <string name="txt_tunai">Tunai</string>
+    <string name="txt_e_wallet">E-Wallet</string>
+    <string name="txt_pesan">Pesan</string>
+    <string name="txt_total_pembayaran">Total Pembayaran</string>
+    <string name="txt_cek_pesanan">Cek Pesanan</string>
+    <string name="txt_metode_pembayaran">Metode Pembayaran</string>
+    <string name="txt_metode_pengiriman">Metode Pengiriman</string>
+    <string name="txt_zero">0</string>
+    <string name="txt_idr_50000">IDR 50000</string>
+    <string name="txt_rename">Rename</string>
+    <string name="txt_logout">Log Out</string>
+    <string name="iv_profile_picture">Profile Picture</string>
+    <string name="txt_profile">Profile</string>
 
 </resources>

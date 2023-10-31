@@ -20,15 +20,15 @@ class MenuItemGridViewHolder(
             onItemClick.invoke(item)
         }
         binding.ivMenuImage.load(item.menuImg)
-        binding.ivMenuImage.isVisible=true
+        binding.ivMenuImage.isVisible = true
         binding.tvMenuName.text = item.menuName
         binding.tvMenuPrice.text = item.menuPrice.toCurrencyFormat()
     }
 }
 
 class MenuItemLinearViewHolder(
-    private val binding : MenuListItemBinding,
-    private val onItemClick : (Menu) -> Unit
+    private val binding: MenuListItemBinding,
+    private val onItemClick: (Menu) -> Unit
 ) : RecyclerView.ViewHolder(binding.root), ViewHolderBinder<Menu> {
     override fun bind(item: Menu) {
         binding.root.setOnClickListener {

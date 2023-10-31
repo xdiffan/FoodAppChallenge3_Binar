@@ -2,28 +2,18 @@ package com.challenge.foodappchallenge3.presentation.cart
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.Fragment
 import com.challenge.foodappchallenge3.R
-import com.challenge.foodappchallenge3.data.local.database.AppDatabase
-import com.challenge.foodappchallenge3.data.local.database.datasource.CartDataSource
-import com.challenge.foodappchallenge3.data.local.database.datasource.CartDatabaseDataSource
-import com.challenge.foodappchallenge3.data.network.api.datasource.RestaurantApiDataSource
-import com.challenge.foodappchallenge3.data.network.api.service.RestaurantService
-import com.challenge.foodappchallenge3.data.repository.CartRepository
-import com.challenge.foodappchallenge3.data.repository.CartRepositoryImpl
 import com.challenge.foodappchallenge3.databinding.FragmentCartBinding
 import com.challenge.foodappchallenge3.model.Cart
-import com.challenge.foodappchallenge3.model.CartMenu
 import com.challenge.foodappchallenge3.presentation.checkout.CheckoutActivity
-import com.challenge.foodappchallenge3.utils.GenericViewModelFactory
 import com.challenge.foodappchallenge3.utils.proceedWhen
 import com.challenge.foodappchallenge3.utils.toCurrencyFormat
-
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FragmentCart : Fragment() {
 
@@ -35,13 +25,13 @@ class FragmentCart : Fragment() {
             }
 
             override fun onPlusTotalItemCartClicked(
-                cart: Cart,
+                cart: Cart
             ) {
                 viewModel.increaseCart(cart)
             }
 
             override fun onMinusTotalItemCartClicked(
-                cart: Cart,
+                cart: Cart
             ) {
                 viewModel.decreaseCart(cart)
             }
@@ -51,32 +41,19 @@ class FragmentCart : Fragment() {
             }
 
             override fun onUserDoneEditingNotes(
-                cart: Cart,
+                cart: Cart
             ) {
                 viewModel.updateNotes(cart)
             }
         })
     }
 
-    private val viewModel: CartViewModel by viewModels {
-        val database =
-            AppDatabase.getInstance(requireContext())
-        val cartDao = database.cartDao()
-        val cartDataSource: CartDataSource =
-            CartDatabaseDataSource(cartDao)
-        val service = RestaurantService.invoke()
-        val restaurantApiDataSource = RestaurantApiDataSource(service)
-        val repo: CartRepository =
-            CartRepositoryImpl(cartDataSource, restaurantApiDataSource)
-        GenericViewModelFactory.create(
-            CartViewModel(repo)
-        )
-    }
+    private val viewModel: CartViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentCartBinding.inflate(
@@ -89,7 +66,7 @@ class FragmentCart : Fragment() {
 
     override fun onViewCreated(
         view: View,
-        savedInstanceState: Bundle?,
+        savedInstanceState: Bundle?
     ) {
         super.onViewCreated(
             view,
@@ -150,7 +127,6 @@ class FragmentCart : Fragment() {
                         getString(R.string.error_empty)
                     result.payload?.let { (_, totalPrice) ->
                         binding.tvTotalPriceAmount.text = totalPrice.toCurrencyFormat()
-
                     }
                 },
                 doOnError = { err ->

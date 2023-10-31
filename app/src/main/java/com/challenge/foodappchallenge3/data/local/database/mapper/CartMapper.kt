@@ -1,7 +1,6 @@
 package com.challenge.foodappchallenge3.data.local.database.mapper
 
 import com.challenge.foodappchallenge3.data.local.database.entity.CartEntity
-
 import com.challenge.foodappchallenge3.model.Cart
 // Entity > View Object
 fun CartEntity?.toCart() = Cart(
@@ -9,7 +8,7 @@ fun CartEntity?.toCart() = Cart(
     menuId = this?.menuId ?: 0,
     itemQuantity = this?.itemQuantity ?: 0,
     itemNotes = this?.itemNotes.orEmpty(),
-    menuPrice = this?.menuPrice ?:0.0,
+    menuPrice = this?.menuPrice ?: 0.0,
     menuName = this?.menuName.orEmpty(),
     menuImgUrl = this?.menuImgUrl.orEmpty()
 )

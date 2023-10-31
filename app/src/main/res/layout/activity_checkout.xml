@@ -15,20 +15,23 @@
         android:layout_marginVertical="16dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UseCompoundDrawables">
 
         <ImageView
             android:id="@+id/iv_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/iv_ic_back" />
+            android:src="@drawable/iv_ic_back"
+            tools:ignore="ContentDescription" />
 
         <TextView
             style="@style/TextAppearance.Material3.TitleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="70dp"
-            android:text="Konfirmasi Pesanan"
+            android:layout_marginHorizontal="16dp"
+            android:text="@string/txt_konfirmasi_pesanan"
             android:textSize="20sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -39,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="28dp"
         android:layout_marginVertical="16dp"
-        android:text="Metode Pengiriman"
+        android:text="@string/txt_metode_pengiriman"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,16 +64,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            android:text="Ambil Sendiri"
+            android:text="@string/txt_ambil_sendiri"
             android:textColor="@color/black" />
 
         <TextView
             style="@style/TextAppearance.Material3.BodyMedium"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
+            android:gravity="right"
             android:layout_height="wrap_content"
-            android:layout_marginStart="170dp"
-            android:text="Dikirim"
-            android:textColor="@color/black" />
+            android:text="@string/txt_dikirim"
+            android:textColor="@color/black"
+            tools:ignore="RtlHardcoded" />
     </LinearLayout>
 
     <TextView
@@ -79,7 +83,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="28dp"
         android:layout_marginVertical="16dp"
-        android:text="Metode Pembayaran"
+        android:text="@string/txt_metode_pembayaran"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -101,16 +105,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            android:text="Tunai"
+            android:text="@string/txt_tunai"
             android:textColor="@color/black" />
 
         <TextView
             style="@style/TextAppearance.Material3.BodyMedium"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
+            android:gravity="right"
             android:layout_height="wrap_content"
-            android:layout_marginStart="220dp"
-            android:text="E-Wallet"
-            android:textColor="@color/black" />
+            android:text="@string/txt_e_wallet"
+            android:textColor="@color/black"
+            tools:ignore="RtlHardcoded" />
     </LinearLayout>
 
     <TextView
@@ -119,7 +124,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="28dp"
         android:layout_marginVertical="8dp"
-        android:text="Cek Pesanan"
+        android:text="@string/txt_cek_pesanan"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -162,11 +167,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Total Pembayaran"
-                    android:textColor="@color/black" />
+                    android:text="@string/txt_total_pembayaran"
+                    android:textColor="@color/black"
+                    tools:ignore="InefficientWeight" />
 
                 <TextView
                     android:id="@+id/total_pembayaran"
+                    android:textSize="14sp"
                     style="@style/TextAppearance.Material3.TitleLarge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -179,7 +186,7 @@
                 android:id="@+id/rv_checkout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
+                android:layout_marginHorizontal="12dp"
                 android:layout_marginVertical="8dp"
                 android:background="@color/white"
                 android:orientation="vertical"
@@ -205,7 +212,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="18dp"
             android:background="@drawable/iv_rounded_corner"
-            android:text="Pesan" />
+            android:text="@string/txt_pesan"
+            tools:ignore="VisualLintButtonSize" />
 
     </androidx.cardview.widget.CardView>
 

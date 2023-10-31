@@ -1,18 +1,16 @@
 package com.challenge.foodappchallenge3.presentation.cart
 
-
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.challenge.foodappchallenge3.core.ViewHolderBinder
 import com.challenge.foodappchallenge3.databinding.CartItemsBinding
 import com.challenge.foodappchallenge3.model.Cart
-import com.challenge.foodappchallenge3.model.CartMenu
 import com.challenge.foodappchallenge3.utils.doneEditing
 import com.challenge.foodappchallenge3.utils.toCurrencyFormat
 
 class CartItemViewHolder(
     private val binding: CartItemsBinding,
-    private val cartListener: CartListener?,
+    private val cartListener: CartListener?
 ) : RecyclerView.ViewHolder(binding.root), ViewHolderBinder<Cart> {
 
     override fun bind(item: Cart) {
@@ -43,18 +41,16 @@ class CartItemViewHolder(
 
     private fun setCartData(item: Cart) {
         binding.apply {
-            binding.ivMenuImg.load(item.menuImgUrl){crossfade(true)}
+            binding.ivMenuImg.load(item.menuImgUrl) { crossfade(true) }
         }
         binding.tvMenuName.text = item.menuName
-        binding.tvMenuPrice.text=item.menuPrice.toCurrencyFormat()
+        binding.tvMenuPrice.text = item.menuPrice.toCurrencyFormat()
         binding.tvMenuPriceTotal.text = (item.menuPrice * item.itemQuantity).toCurrencyFormat()
         binding.tvCounting.text = item.itemQuantity.toString()
     }
-
 }
 
-
-interface CartListener{
+interface CartListener {
     fun onCartClicked(item: Cart)
     fun onPlusTotalItemCartClicked(cart: Cart)
     fun onMinusTotalItemCartClicked(cart: Cart)

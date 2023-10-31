@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/yellow"
+    tools:ignore="Overdraw"
     tools:context=".presentation.detailmenu.DetailMenuActivity">
     <ImageView
         android:id="@+id/ib_arrow_back"
@@ -172,7 +173,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:text="0"
+                android:text="@string/txt_zero"
                 android:textColor="@color/black" />
             <ImageView
                 android:id="@+id/ic_add"
@@ -194,7 +195,8 @@
             android:layout_marginBottom="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ll_calculate"
-            tools:text="@string/add_to_price" />
+            tools:text="@string/add_to_price"
+            tools:ignore="VisualLintButtonSize" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

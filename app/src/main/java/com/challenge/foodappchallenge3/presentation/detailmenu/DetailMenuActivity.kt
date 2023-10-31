@@ -3,24 +3,17 @@ package com.challenge.foodappchallenge3.presentation.detailmenu
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import coil.load
 import com.challenge.foodappchallenge3.R
-import com.challenge.foodappchallenge3.data.local.database.AppDatabase
-import com.challenge.foodappchallenge3.data.local.database.datasource.CartDataSource
-import com.challenge.foodappchallenge3.data.local.database.datasource.CartDatabaseDataSource
-import com.challenge.foodappchallenge3.data.network.api.datasource.RestaurantApiDataSource
-import com.challenge.foodappchallenge3.data.network.api.service.RestaurantService
-import com.challenge.foodappchallenge3.data.repository.CartRepository
-import com.challenge.foodappchallenge3.data.repository.CartRepositoryImpl
 import com.challenge.foodappchallenge3.databinding.ActivityDetailMenuBinding
 import com.challenge.foodappchallenge3.model.Menu
-import com.challenge.foodappchallenge3.utils.GenericViewModelFactory
 import com.challenge.foodappchallenge3.utils.proceedWhen
 import com.challenge.foodappchallenge3.utils.toCurrencyFormat
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class DetailMenuActivity : AppCompatActivity() {
     private val binding: ActivityDetailMenuBinding by lazy {
@@ -28,17 +21,7 @@ class DetailMenuActivity : AppCompatActivity() {
             layoutInflater
         )
     }
-    private val viewModel: DetailMenuViewModel by viewModels {
-
-        val database = AppDatabase.getInstance(this)
-        val cartDao = database.cartDao()
-        val cartDataSource: CartDataSource = CartDatabaseDataSource(cartDao)
-
-        val service= RestaurantService.invoke()
-        val restaurantApiDataSource= RestaurantApiDataSource(service)
-        val repo: CartRepository = CartRepositoryImpl(cartDataSource,restaurantApiDataSource)
-        GenericViewModelFactory.create(DetailMenuViewModel(intent?.extras,repo))
-    }
+    private val viewModel: DetailMenuViewModel by viewModel { parametersOf(intent.extras) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,7 +44,7 @@ class DetailMenuActivity : AppCompatActivity() {
         binding.ibArrowBack.setOnClickListener {
             onBackPressed()
         }
-        binding.btnAddToCart.setOnClickListener{
+        binding.btnAddToCart.setOnClickListener {
             viewModel.addToCart()
         }
     }
@@ -79,9 +62,11 @@ class DetailMenuActivity : AppCompatActivity() {
                 doOnSuccess = {
                     Toast.makeText(this, "Pesanan Ditambahkan ke Keranjang !", Toast.LENGTH_SHORT).show()
                     finish()
-                }, doOnError = {
+                },
+                doOnError = {
                     Toast.makeText(this, it.exception?.message.orEmpty(), Toast.LENGTH_SHORT).show()
-                })
+                }
+            )
         }
     }
 
@@ -92,7 +77,7 @@ class DetailMenuActivity : AppCompatActivity() {
             binding.tvMenuPrice.text = it.menuPrice.toCurrencyFormat()
             binding.tvMenuDesc.text = it.menuDesc
             binding.tvLocationDetail.text = getString(R.string.location)
-            binding.btnAddToCart.text = getString(R.string.add_to_cart,it.menuPrice.toInt())
+            binding.btnAddToCart.text = getString(R.string.add_to_cart)
         }
     }
 
@@ -110,5 +95,4 @@ class DetailMenuActivity : AppCompatActivity() {
             context.startActivity(intent)
         }
     }
-
 }

@@ -7,16 +7,14 @@ import com.challenge.foodappchallenge3.data.network.api.model.order.OrderRespons
 import com.challenge.foodappchallenge3.data.network.api.service.RestaurantService
 
 interface RestaurantDataSource {
-    suspend fun getMenus(category: String? = null) : MenusResponse
-    suspend fun getCategories() : CategoriesResponse
-    suspend fun createOrder(orderRequest: OrderRequest) : OrderResponse
-
+    suspend fun getMenus(category: String? = null): MenusResponse
+    suspend fun getCategories(): CategoriesResponse
+    suspend fun createOrder(orderRequest: OrderRequest): OrderResponse
 }
-
 
 class RestaurantApiDataSource(
     private val service: RestaurantService
-): RestaurantDataSource {
+) : RestaurantDataSource {
     override suspend fun getMenus(category: String?): MenusResponse {
         return service.getMenus(category)
     }

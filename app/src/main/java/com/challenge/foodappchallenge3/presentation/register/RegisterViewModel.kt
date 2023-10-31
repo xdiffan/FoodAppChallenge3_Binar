@@ -14,9 +14,9 @@ class RegisterViewModel(private val repo: UserRepository) : ViewModel() {
     val registerResult: LiveData<ResultWrapper<Boolean>>
         get() = _registerResult
 
-    fun doRegister(fullName: String, email: String, password: String){
+    fun doRegister(fullName: String, email: String, password: String) {
         viewModelScope.launch {
-            repo.doRegister(fullName, email, password).collect{result->
+            repo.doRegister(fullName, email, password).collect { result ->
                 _registerResult.postValue(result)
             }
         }

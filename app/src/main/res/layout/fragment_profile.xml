@@ -19,7 +19,7 @@
             style="@style/TextAppearance.Material3.TitleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Profile"
+            android:text="@string/txt_profile"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +33,7 @@
             android:layout_below="@id/tv_profile"
             android:layout_centerHorizontal="true"
             android:layout_marginVertical="24dp"
-            android:contentDescription="Profile Picture"
+            android:contentDescription="@string/iv_profile_picture"
             android:src="@drawable/iv_icon_profile_pict"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,13 +64,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/ic_edit_pen" />
+            android:src="@drawable/ic_edit_pen"
+            tools:ignore="ContentDescription" />
 
         <TextView
             style="@style/TextAppearance.Material3.TitleMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rename"
+            android:text="@string/txt_rename"
             android:textAlignment="center" />
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
@@ -97,7 +98,8 @@
             android:id="@+id/btn_change_password"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_password" />
+            android:src="@drawable/ic_password"
+            tools:ignore="ContentDescription,ImageContrastCheck" />
 
         <TextView
             style="@style/TextAppearance.Material3.TitleMedium"
@@ -109,7 +111,7 @@
             style="@style/TextAppearance.Material3.TitleMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Password"
+            android:text="@string/txt_password"
             android:textAlignment="center" />
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
@@ -128,7 +130,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/layout_form">
+    app:layout_constraintTop_toBottomOf="@id/layout_form"
+    tools:ignore="UseCompoundDrawables">
     <ImageView
         android:id="@+id/btn_logout"
         android:layout_width="wrap_content"
@@ -136,12 +139,13 @@
         android:layout_gravity="center"
         android:src="@drawable/iv_logout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_form" />
+        app:layout_constraintTop_toBottomOf="@id/layout_form"
+        tools:ignore="ContentDescription" />
     <TextView
         style="@style/TextAppearance.Material3.TitleMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Log Out"
+        android:text="@string/txt_logout"
         android:textAlignment="center" />
 </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

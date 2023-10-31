@@ -9,12 +9,12 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 
 interface FirebaseAuthDataSource {
-    fun isLoggedIn():Boolean
-    fun getCurrentUser():FirebaseUser?
-    fun doLogout():Boolean
-    suspend fun doRegister(fullName:String,email:String,password:String):Boolean
+    fun isLoggedIn(): Boolean
+    fun getCurrentUser(): FirebaseUser?
+    fun doLogout(): Boolean
+    suspend fun doRegister(fullName: String, email: String, password: String): Boolean
 
-    suspend fun doLogin(email: String,password: String):Boolean
+    suspend fun doLogin(email: String, password: String): Boolean
     suspend fun updateProfile(
         fullName: String? = null,
         photoUri: Uri? = null
@@ -24,14 +24,12 @@ interface FirebaseAuthDataSource {
 
     suspend fun updateEmail(newEmail: String): Boolean
     fun sendChangePasswordRequestByEmail(): Boolean
-
-
 }
 
-class FirebaseAuthDataSourceImpl(private val firebaseAuth: FirebaseAuth):FirebaseAuthDataSource{
+class FirebaseAuthDataSourceImpl(private val firebaseAuth: FirebaseAuth) : FirebaseAuthDataSource {
     override fun isLoggedIn(): Boolean {
 //        current user adalah user yg sedang login
-        return firebaseAuth.currentUser!=null
+        return firebaseAuth.currentUser != null
     }
 
     override fun getCurrentUser(): FirebaseUser? {
@@ -44,18 +42,18 @@ class FirebaseAuthDataSourceImpl(private val firebaseAuth: FirebaseAuth):Firebas
     }
 
     override suspend fun doRegister(fullName: String, email: String, password: String): Boolean {
-        val registerResult=firebaseAuth.createUserWithEmailAndPassword(email, password).await()
+        val registerResult = firebaseAuth.createUserWithEmailAndPassword(email, password).await()
         registerResult.user?.updateProfile(
             userProfileChangeRequest {
-                displayName=fullName
+                displayName = fullName
             }
         )?.await()
-        return registerResult.user!=null
+        return registerResult.user != null
     }
 
     override suspend fun doLogin(email: String, password: String): Boolean {
-        val loginResult=firebaseAuth.signInWithEmailAndPassword(email, password).await()
-        return loginResult.user!=null
+        val loginResult = firebaseAuth.signInWithEmailAndPassword(email, password).await()
+        return loginResult.user != null
     }
 
     override suspend fun updateProfile(

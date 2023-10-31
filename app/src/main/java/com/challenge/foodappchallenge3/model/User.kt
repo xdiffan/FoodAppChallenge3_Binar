@@ -2,13 +2,16 @@ package com.challenge.foodappchallenge3.model
 
 import com.google.firebase.auth.FirebaseUser
 
-
 data class User(
-    val fullName:String,
-    val email: String,
+    val fullName: String,
+    val email: String
 )
 
-fun FirebaseUser?.toUser(): User? = if (this != null) User(
-    fullName = this.displayName.orEmpty(),
-    email = this.email.orEmpty(),
-) else null
+fun FirebaseUser?.toUser(): User? = if (this != null) {
+    User(
+        fullName = this.displayName.orEmpty(),
+        email = this.email.orEmpty()
+    )
+} else {
+    null
+}

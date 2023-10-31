@@ -1,9 +1,8 @@
 package com.challenge.foodappchallenge3.presentation.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
-
 import androidx.navigation.ui.setupWithNavController
 import com.challenge.foodappchallenge3.R
 import com.challenge.foodappchallenge3.databinding.ActivityMainBinding
@@ -17,8 +16,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setBottomNav()
     }
-        private fun setBottomNav(){
+    private fun setBottomNav() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
-        binding.bottomNavView.setupWithNavController(navHostFragment.navController)}
-
+        binding.bottomNavView.setupWithNavController(navHostFragment.navController)
+    }
 }

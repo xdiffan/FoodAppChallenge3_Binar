@@ -23,9 +23,9 @@ data class MenuItemResponse(
 )
 
 fun MenuItemResponse.toMenu() = Menu(
-    id=this.id?:0,
+    id = this.id ?: 0,
     menuName = this.name.orEmpty(),
-    menuPrice = this.price?:0.0,
+    menuPrice = this.price ?: 0.0,
     menuImg = this.imageUrl.orEmpty(),
     menuDesc = this.description.orEmpty()
 )

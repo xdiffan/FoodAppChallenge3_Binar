@@ -12,31 +12,33 @@ import com.challenge.foodappchallenge3.model.Menu
 
 class MenuListAdapter(
     var adapterLayoutMode: AdapterLayoutMode,
-    private val onItemClick: (Menu) -> Unit,
+    private val onItemClick: (Menu) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val differ = AsyncListDiffer(this,
+    private val differ = AsyncListDiffer(
+        this,
         object : DiffUtil.ItemCallback<Menu>() {
             override fun areItemsTheSame(
                 oldItem: Menu,
-                newItem: Menu,
+                newItem: Menu
             ): Boolean {
                 return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(
                 oldItem: Menu,
-                newItem: Menu,
+                newItem: Menu
             ): Boolean {
                 return oldItem.hashCode() == newItem.hashCode()
             }
-        })
+        }
+    )
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int,
+        viewType: Int
     ): RecyclerView.ViewHolder {
-        return when (viewType){
+        return when (viewType) {
             AdapterLayoutMode.GRID.ordinal -> {
                 MenuItemGridViewHolder(
                     binding = MenuGridItemBinding.inflate(
@@ -67,10 +69,9 @@ class MenuListAdapter(
     }
     override fun onBindViewHolder(
         holder: RecyclerView.ViewHolder,
-        position: Int,
+        position: Int
     ) {
         (holder as ViewHolderBinder<Menu>).bind(differ.currentList[position])
     }
     override fun getItemCount(): Int = differ.currentList.size
-
 }

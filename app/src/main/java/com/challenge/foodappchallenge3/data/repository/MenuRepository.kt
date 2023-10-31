@@ -1,17 +1,12 @@
 package com.challenge.foodappchallenge3.data.repository
-
-
 import com.challenge.foodappchallenge3.data.network.api.datasource.RestaurantDataSource
 import com.challenge.foodappchallenge3.data.network.api.model.category.toCategoryList
 import com.challenge.foodappchallenge3.data.network.api.model.menu.toMenuList
 import com.challenge.foodappchallenge3.model.Category
 import com.challenge.foodappchallenge3.model.Menu
 import com.challenge.foodappchallenge3.utils.ResultWrapper
-
 import com.challenge.foodappchallenge3.utils.proceedFlow
 import kotlinx.coroutines.flow.Flow
-
-
 
 interface MenuRepository {
     fun getCategories(): Flow<ResultWrapper<List<Category>>>
@@ -32,5 +27,4 @@ class MenuRepositoryImpl(
             apiDataSource.getMenus(category).data?.toMenuList() ?: emptyList()
         }
     }
-
 }

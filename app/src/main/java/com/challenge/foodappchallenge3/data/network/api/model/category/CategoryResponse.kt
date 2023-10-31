@@ -17,4 +17,4 @@ fun CategoryResponse.toCategory() = Category(
     categoryImgSrc = this.imageUrl.orEmpty()
 )
 
-fun Collection<CategoryResponse>.toCategoryList() = this.map { it.toCategory()}
+fun Collection<CategoryResponse>.toCategoryList() = this.map { it.toCategory() }

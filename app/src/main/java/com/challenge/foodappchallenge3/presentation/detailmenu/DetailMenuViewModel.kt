@@ -11,10 +11,10 @@ import com.challenge.foodappchallenge3.utils.ResultWrapper
 import kotlinx.coroutines.launch
 
 class DetailMenuViewModel(
-    extras: Bundle?,
+    private val extras: Bundle?,
     private val cartRepository: CartRepository
-    )
-    : ViewModel(){
+) :
+    ViewModel() {
 
     val menu = extras?.getParcelable<Menu>(DetailMenuActivity.EXTRA_PRODUCT)
 
@@ -34,8 +34,8 @@ class DetailMenuViewModel(
     }
 
     fun minus() {
-        if((menuCountLiveData.value ?: 0) > 0){
-            val count = (menuCountLiveData.value ?: 0) -1
+        if ((menuCountLiveData.value ?: 0) > 0) {
+            val count = (menuCountLiveData.value ?: 0) - 1
             menuCountLiveData.postValue(count)
             priceLiveData.postValue(menu?.menuPrice?.times(count) ?: 0.0)
         }
@@ -51,5 +51,4 @@ class DetailMenuViewModel(
             }
         }
     }
-
 }
