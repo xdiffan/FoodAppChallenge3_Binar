@@ -66,9 +66,6 @@ object AppModules {
         viewModelOf(::DetailMenuViewModel)
     }
 
-//    private val utilsModule= module {
-//        single { AssetWrapper(androidContext()) }
-//    }
     val modules: List<Module> = listOf(
         localModule,
         networkModule,
