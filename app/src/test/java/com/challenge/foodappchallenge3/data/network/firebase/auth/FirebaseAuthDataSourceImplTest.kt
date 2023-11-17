@@ -11,6 +11,7 @@ import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
 import io.mockk.mockkObject
+import io.mockk.mockkStatic
 import io.mockk.verify
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.*
@@ -132,5 +133,13 @@ class FirebaseAuthDataSourceImplTest {
 
         val result = firebaseAuthDataSource.updateProfile("John Doe", Uri.parse("content://path/to/photo"))
         assertTrue(result)
+    }
+    @Test
+    fun testLogout(){
+        mockkStatic(FirebaseAuth::class)
+        every { FirebaseAuth.getInstance() }returns firebaseAuth
+        every { firebaseAuth.signOut() }returns Unit
+        val result=firebaseAuthDataSource.doLogout()
+        assertEquals(result,true)
     }
 }
