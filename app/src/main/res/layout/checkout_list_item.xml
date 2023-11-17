@@ -38,6 +38,7 @@
             android:layout_height="match_parent"
             android:textAlignment="textStart"
             android:textSize="24sp"
+            android:textColor="@color/black"
             android:textStyle="bold"
             tools:text="Mie Ayam" />
 

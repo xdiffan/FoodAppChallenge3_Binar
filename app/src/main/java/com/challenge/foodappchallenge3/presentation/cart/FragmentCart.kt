@@ -13,6 +13,7 @@ import com.challenge.foodappchallenge3.model.Cart
 import com.challenge.foodappchallenge3.presentation.checkout.CheckoutActivity
 import com.challenge.foodappchallenge3.utils.proceedWhen
 import com.challenge.foodappchallenge3.utils.toCurrencyFormat
+import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FragmentCart : Fragment() {
@@ -79,9 +80,21 @@ class FragmentCart : Fragment() {
 
     private fun setClickListener() {
         binding.btnCheckout.setOnClickListener {
-            context?.startActivity(Intent(requireContext(), CheckoutActivity::class.java))
+            val cartListData = viewModel.cartList.value
+            if (cartListData != null) {
+                if (cartListData.payload?.first?.isNotEmpty() == true) {
+                    context?.startActivity(Intent(requireContext(), CheckoutActivity::class.java))
+                } else {
+                    Snackbar.make(
+                        requireView(),
+                        "Pesanan Kosong",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+            }
         }
     }
+
 
     private fun observeData() {
         viewModel.cartList.observe(

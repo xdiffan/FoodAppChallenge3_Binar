@@ -36,6 +36,7 @@
             android:id="@+id/tv_menu_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:textColor="@color/black"
             android:text="@string/txt_mie_jumbo_naruto"
             android:textAlignment="textStart"
             android:textSize="16sp"
