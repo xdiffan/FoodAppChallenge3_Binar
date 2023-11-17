@@ -12,7 +12,9 @@ import com.challenge.foodappchallenge3.model.Menu
 import com.challenge.foodappchallenge3.utils.ResultWrapper
 import com.challenge.foodappchallenge3.utils.proceed
 import com.challenge.foodappchallenge3.utils.proceedFlow
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
@@ -49,8 +51,11 @@ class CartRepositoryImpl(
             } else {
                 it
             }
+        }.catch{
+            emit(ResultWrapper.Error(Exception(it)))
         }.onStart {
             emit(ResultWrapper.Loading())
+            delay(2000)
         }
     }
 

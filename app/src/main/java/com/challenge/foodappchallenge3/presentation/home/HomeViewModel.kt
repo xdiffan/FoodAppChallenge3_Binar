@@ -14,7 +14,11 @@ import com.challenge.foodappchallenge3.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class HomeViewModel(private val repository: MenuRepository, private val profileRepository: UserRepository, private val userPreferenceDataSource: UserPreferenceDataSource) : ViewModel() {
+class HomeViewModel(
+    private val repository: MenuRepository,
+    private val profileRepository: UserRepository,
+    private val userPreferenceDataSource: UserPreferenceDataSource)
+    : ViewModel() {
     private val _categories = MutableLiveData<ResultWrapper<List<Category>>>()
     val categories: LiveData<ResultWrapper<List<Category>>>
         get() = _categories
